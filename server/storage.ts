@@ -1,24 +1,18 @@
 import { contactMessages, type ContactMessage, type InsertMessage } from "@shared/schema";
+import { db } from "./db";
 
 export interface IStorage {
   createMessage(message: InsertMessage): Promise<ContactMessage>;
 }
 
-export class MemStorage implements IStorage {
-  private messages: Map<number, ContactMessage>;
-  private currentId: number;
-
-  constructor() {
-    this.messages = new Map();
-    this.currentId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async createMessage(insertMessage: InsertMessage): Promise<ContactMessage> {
-    const id = this.currentId++;
-    const message: ContactMessage = { ...insertMessage, id };
-    this.messages.set(id, message);
+    const [message] = await db
+      .insert(contactMessages)
+      .values(insertMessage)
+      .returning();
     return message;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
