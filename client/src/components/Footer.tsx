@@ -1,4 +1,5 @@
-import { SiGithub, SiLinkedin, SiInstagram } from "react-icons/si";
+
+import { SiGithub, SiLinkedin } from "react-icons/si";
 
 export function Footer() {
   return (
@@ -12,11 +13,8 @@ export function Footer() {
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
               <SiGithub className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+            <a href="https://www.linkedin.com/in/monideepc/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
               <SiLinkedin className="w-5 h-5" />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-              <SiInstagram className="w-5 h-5" />
             </a>
           </div>
         </div>
