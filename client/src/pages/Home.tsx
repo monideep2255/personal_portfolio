@@ -47,9 +47,9 @@ export default function Home() {
             transition={{ delay: 0.5 }}
             className="text-xl text-muted-foreground mb-8 leading-relaxed"
           >
-            At the intersection of AI innovation and healthcare advancement, I transform complex machine learning technologies 
-            into impactful solutions at NCBI, NIH. Leading search analytics and biomedical research initiatives, 
-            I bridge the gap between cutting-edge technology and meaningful user experiences that make a difference in healthcare.
+            Welcome! I'm passionate about transforming complex AI/ML technologies into user-friendly solutions 
+            at NCBI, NIH. With expertise in product management and artificial intelligence, 
+            I focus on innovations that advance biomedical research and enhance user experiences.
           </motion.p>
 
           <motion.div
