@@ -13,14 +13,20 @@ export default function Home() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Hi, I'm <span className="text-primary">Monideep Chakraborti</span>
-            <br />
-            Product Manager
-          </h1>
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              Monideep Chakraborti
+            </h1>
+            <h2 className="text-2xl md:text-3xl text-primary font-semibold mb-6">
+              Product Manager & AI/ML Specialist
+            </h2>
+          </div>
+
           <p className="text-xl text-muted-foreground mb-8">
-            Experienced in AI/ML, search analytics, and product development with a focus on creating innovative solutions.
+            Experienced product manager specializing in AI/ML technologies and search analytics at NCBI, NIH. 
+            Focused on developing innovative solutions that transform biomedical research and improve user experiences.
           </p>
+
           <div className="flex gap-4">
             <Button asChild size="lg">
               <Link href="/projects">
