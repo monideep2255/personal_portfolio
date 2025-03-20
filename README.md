@@ -92,12 +92,14 @@ Last Updated: March 20, 2025
 ### Prerequisites
 - Node.js v20.18.1 or higher
 - PostgreSQL database
+- npm v10.x or higher
 
 ### Installation
 
 1. Clone the repository
 ```bash
 git clone https://github.com/monideep2255/personal_portfolio.git
+cd personal_portfolio
 ```
 
 2. Install dependencies
@@ -105,12 +107,18 @@ git clone https://github.com/monideep2255/personal_portfolio.git
 npm install
 ```
 
-3. Set up environment variables
+3. Set up environment variables by creating a `.env` file:
 ```env
 DATABASE_URL=your_postgresql_database_url
+SENDGRID_API_KEY=your_sendgrid_api_key
 ```
 
-4. Run the development server
+4. Initialize the database
+```bash
+npm run db:push
+```
+
+5. Start the development server
 ```bash
 npm run dev
 ```
