@@ -81,68 +81,14 @@ cd personal_portfolio
 npm install
 ```
 
-3. Set up environment variables by creating a `.env` file:
+3. Set up environment variables
 ```env
 DATABASE_URL=your_postgresql_database_url
-ADMIN_USERNAME=your_admin_username
-ADMIN_PASSWORD=your_admin_password
 ```
 
-4. Initialize the database
-```bash
-npm run db:push
-```
-
-5. Start the development server
-```bash
-npm run dev
-```
-
-### Self-Hosting Setup
-If you need to run this project on your own machine during development:
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Set up environment variables in `.env`:
-```env
-DATABASE_URL=your_postgresql_database_url
-ADMIN_USERNAME=your_admin_username
-ADMIN_PASSWORD=your_admin_password
-```
-
-3. Start development server:
+4. Run the development server
 ```bash
 npm run dev
 ```
 
 5. Open [http://localhost:5000](http://localhost:5000) in your browser
-
-## 📝 Project Structure
-
-```
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── lib/
-│   │   └── hooks/
-├── server/
-│   ├── routes.ts
-│   ├── storage.ts
-│   └── db.ts
-└── shared/
-    └── schema.ts
-```
-
-## 🤝 Contributing
-
-This is a personal portfolio project, but if you find any bugs or have suggestions for improvements, feel free to open an issue.
-
-## 📄 License
-
-This project is private and not licensed for public use.
-
-Last Updated: March 20, 2025
