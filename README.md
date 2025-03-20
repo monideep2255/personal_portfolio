@@ -85,6 +85,18 @@ Key Technologies:
 - Database is provisioned and running
 - All core functionality is working as expected
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](./attached_assets/Screenshot%202025-03-20%20at%207.12.15%20PM.png)
+
+### Projects Page
+![Projects Page](./attached_assets/Screenshot%202025-03-20%20at%207.12.57%20PM.png)
+
+### Resume Section
+![Resume Page 1](./attached_assets/resume%201.png)
+![Resume Page 2](./attached_assets/resume%202.png)
+
 Last Updated: March 20, 2025
 
 ## 🚀 Getting Started
