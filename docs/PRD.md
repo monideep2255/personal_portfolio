@@ -1,4 +1,3 @@
-
 # Product Requirements Document (PRD)
 ## Personal Portfolio Website
 
@@ -30,10 +29,10 @@ A modern, responsive personal portfolio website designed to showcase professiona
 
 ✅ Functional Status: Navigation, theme switching, contact form, responsive design, project showcase, and about page are implemented.
 
-#### Phase 2: Resume & Deployment
-- Resume Section: Add a resume section with either a PDF viewer or embedded resume content
-- Deployment: Deploy the website on Replit
-- Projects Section Update: Display a 'Coming Soon' placeholder for project updates
+#### Phase 2: Resume & Deployment (🔄 In Progress) – March 20, 2025
+✅ Resume Section: Successfully integrated resume content into the About page with clear section demarcation
+⏳ Deployment: Deploy the website on Replit
+⏳ Projects Section Update: Display a 'Coming Soon' placeholder for project updates
 
 #### Phase 3: Dynamic Project Uploads
 - Project Management: Enable dynamic project uploads using JSON or database integration
@@ -75,4 +74,4 @@ A modern, responsive personal portfolio website designed to showcase professiona
 - Database is provisioned and running
 - All core functionality is working as expected
 
-Last Updated: March 19, 2025
+Last Updated: March 20, 2025
