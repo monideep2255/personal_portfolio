@@ -14,12 +14,12 @@ export default function Home() {
           className="max-w-3xl"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Hi, I'm <span className="text-primary">Your Name</span>
+            Hi, I'm <span className="text-primary">Monideep Chakraborti</span>
             <br />
-            Full Stack Developer
+            Product Manager
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            I build exceptional and accessible digital experiences for the web.
+            Experienced in AI/ML, search analytics, and product development with a focus on creating innovative solutions.
           </p>
           <div className="flex gap-4">
             <Button asChild size="lg">
