@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -5,7 +6,7 @@ import { Link } from "wouter";
 
 export default function Home() {
   return (
-    <section className="min-h-[calc(100vh-4rem)] flex items-center">
+    <section className="min-h-[calc(100vh-4rem)] flex items-center bg-gradient-to-b from-background to-secondary/10">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -14,30 +15,61 @@ export default function Home() {
           className="max-w-3xl"
         >
           <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-primary mb-4"
+            >
+              👋 Hi, I'm
+            </motion.div>
+            <motion.h1 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80"
+            >
               Monideep Chakraborti
-            </h1>
-            <h2 className="text-2xl md:text-3xl text-primary font-semibold mb-6">
+            </motion.h1>
+            <motion.h2 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-2xl md:text-3xl text-primary font-semibold mb-6"
+            >
               Product Manager & AI/ML Specialist
-            </h2>
+            </motion.h2>
           </div>
 
-          <p className="text-xl text-muted-foreground mb-8">
-            Experienced product manager specializing in AI/ML technologies and search analytics at NCBI, NIH. 
-            Focused on developing innovative solutions that transform biomedical research and improve user experiences.
-          </p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-xl text-muted-foreground mb-8 leading-relaxed"
+          >
+            Welcome! I'm passionate about transforming complex AI/ML technologies into user-friendly solutions 
+            at NCBI, NIH. With expertise in product management and artificial intelligence, 
+            I focus on innovations that advance biomedical research and enhance user experiences.
+          </motion.p>
 
-          <div className="flex gap-4">
-            <Button asChild size="lg">
-              <Link href="/projects">
-                View Projects
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/contact">Contact Me</Link>
-            </Button>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex gap-4 items-center"
+          >
+            <Link href="/projects">
+              <Button size="lg" className="group">
+                View My Work
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button variant="outline" size="lg">
+                Get In Touch
+              </Button>
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>
