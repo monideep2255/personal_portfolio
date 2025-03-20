@@ -55,9 +55,12 @@ export default function About() {
 
               <div className="border-l-4 border-primary pl-6">
                 <h2 className="text-2xl font-bold mb-6">Technical Skills</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="p-4 rounded-lg border">
-                <h3 className="font-semibold mb-2">Product & Project Management</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                  <div className="p-4 rounded-lg border">
+                    <h3 className="font-semibold mb-2">Product & Project Management</h3>
+                  </div>
+                </div>
+              </div>
                 <p className="text-sm text-muted-foreground">Jira, Confluence, Trello, Scrum, Kanban, Agile Release Management</p>
               </div>
               <div className="p-4 rounded-lg border">
