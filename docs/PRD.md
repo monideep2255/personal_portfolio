@@ -1,5 +1,5 @@
 # Product Requirements Document (PRD)
-## Personal Portfolio Website
+## Personal Website
 
 ### Project Overview
 A modern, responsive personal portfolio website designed to showcase professional skills and projects with an emphasis on interactive user experience and smooth design transitions.
