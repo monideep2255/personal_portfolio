@@ -13,11 +13,48 @@ export default function About() {
           <h1 className="text-4xl font-bold mb-8">About Me</h1>
           <div className="prose dark:prose-invert max-w-none">
             <p className="text-lg mb-8">
-              I'm a Product Manager with expertise in AI/ML technologies and search analytics. Currently working at NCBI, NIH, 
-              where I lead comprehensive search analytics projects and develop innovative solutions for biomedical research.
+              I'm a passionate software developer with expertise in full-stack development and machine learning. I focus on creating efficient, scalable solutions while continuously learning and adapting to new technologies.
             </p>
 
-            <h2 className="text-2xl font-bold mb-4">Technical Skills</h2>
+            <div className="space-y-12">
+              <div className="border-l-4 border-primary pl-6">
+                <h2 className="text-2xl font-bold mb-6">Education</h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold">Master of Science in Information Systems</h3>
+                    <p className="text-muted-foreground">University of Maryland, Baltimore County • 2022 - 2024</p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Bachelor of Technology in Computer Science</h3>
+                    <p className="text-muted-foreground">Kalinga Institute of Industrial Technology • 2016 - 2020</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h2 className="text-2xl font-bold mb-6">Work Experience</h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold">Technical Lead</h3>
+                    <p className="text-muted-foreground">Cognizant • Jul 2020 - Jul 2022</p>
+                    <p className="mt-2">Led development teams in implementing enterprise solutions and mentored junior developers.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h2 className="text-2xl font-bold mb-6">Leadership</h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold">Graduate Assistant</h3>
+                    <p className="text-muted-foreground">UMBC • Sep 2022 - May 2024</p>
+                    <p className="mt-2">Leading research initiatives in Natural Language Processing and managing academic projects.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h2 className="text-2xl font-bold mb-6">Technical Skills</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <div className="p-4 rounded-lg border">
                 <h3 className="font-semibold mb-2">Product & Project Management</h3>
