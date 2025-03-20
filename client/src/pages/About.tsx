@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { SiReact, SiNodedotjs, SiTypescript, SiPostgresql } from "react-icons/si";
 
@@ -6,7 +7,6 @@ const skills = [
   { name: "Node.js", icon: SiNodedotjs },
   { name: "TypeScript", icon: SiTypescript },
   { name: "PostgreSQL", icon: SiPostgresql },
-  // Add more skills as needed
 ];
 
 export default function About() {
@@ -41,6 +41,18 @@ export default function About() {
               </div>
             </div>
 
+            <h2 className="text-2xl font-bold mb-4">Education</h2>
+            <div className="space-y-4 mb-8">
+              <div>
+                <h3 className="text-xl font-semibold">Master of Science in Information Systems</h3>
+                <p className="text-muted-foreground">University of Maryland, Baltimore County • 2022 - 2024</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold">Bachelor of Technology in Computer Science</h3>
+                <p className="text-muted-foreground">Kalinga Institute of Industrial Technology • 2016 - 2020</p>
+              </div>
+            </div>
+
             <h2 className="text-2xl font-bold mb-4">Experience</h2>
             <div className="space-y-6">
               <div>
@@ -59,7 +71,24 @@ export default function About() {
                   managing cross-functional teams and conducting market research.
                 </p>
               </div>
-              {/* Add more experience items as needed */}
+            </div>
+
+            <h2 className="text-2xl font-bold mb-4 mt-8">Leadership</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold">Graduate Assistant</h3>
+                <p className="text-muted-foreground">UMBC • Sep 2022 - May 2024</p>
+                <p className="mt-2">
+                  Leading research initiatives in Natural Language Processing and managing academic projects.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold">Technical Lead</h3>
+                <p className="text-muted-foreground">Cognizant • Jul 2020 - Jul 2022</p>
+                <p className="mt-2">
+                  Led development teams in implementing enterprise solutions and mentored junior developers.
+                </p>
+              </div>
             </div>
           </div>
         </motion.div>
