@@ -1,22 +1,5 @@
-import { ProjectCard } from "@/components/ProjectCard";
-
-const projects = [
-  {
-    title: "Project 1",
-    description: "A full-stack web application built with React and Node.js",
-    technologies: ["React", "Node.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/username/project1",
-    liveUrl: "https://project1.com",
-  },
-  {
-    title: "Project 2",
-    description: "An e-commerce platform with payment integration",
-    technologies: ["Next.js", "PostgreSQL", "Stripe", "AWS"],
-    githubUrl: "https://github.com/username/project2",
-    liveUrl: "https://project2.com",
-  },
-  // Add more projects as needed
-];
+import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 export default function Projects() {
   return (
@@ -24,14 +7,23 @@ export default function Projects() {
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold mb-8">Projects</h1>
         <p className="text-muted-foreground mb-12 max-w-2xl">
-          Here are some of the projects I've worked on. Each project represents unique
-          challenges and learning experiences.
+          A curated collection of my professional projects and contributions is coming soon. 
+          Stay tuned for detailed case studies and technical demonstrations.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} {...project} index={index} />
-          ))}
-        </div>
+
+        <motion.div 
+          className="flex flex-col items-center justify-center p-12 text-center bg-card rounded-lg border"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
+          <h2 className="text-2xl font-semibold mb-2">Coming Soon</h2>
+          <p className="text-muted-foreground max-w-md">
+            I'm currently preparing an engaging showcase of my work. Check back soon to explore my projects 
+            in AI/ML, search analytics, and product development.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

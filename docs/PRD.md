@@ -2,7 +2,16 @@
 ## Personal Portfolio Website
 
 ### Project Overview
-A modern, responsive personal portfolio website designed to showcase professional skills and projects. The website features a clean, professional design with dark/light theme support and a contact form for visitor inquiries.
+A modern, responsive personal portfolio website designed to showcase professional skills and projects with an emphasis on interactive user experience and smooth design transitions.
+
+Key Technologies:
+- Next.js frontend framework
+- Tailwind CSS for styling
+- React Icons library
+- next-themes for dark mode implementation
+- PostgreSQL for contact form data storage
+- Personalized About section with organized professional information
+- Responsive and mobile-friendly design with clear section demarcation
 
 ### Phases & Feature Development
 
@@ -29,9 +38,9 @@ A modern, responsive personal portfolio website designed to showcase professiona
 
 ✅ Functional Status: Navigation, theme switching, contact form, responsive design, project showcase, and about page are implemented.
 
-#### Phase 2: Resume & Deployment (🔄 In Progress) – March 20, 2025
+#### Phase 2: Content & Polish (🔄 In Progress) – March 20, 2025
 ✅ Resume Section: Successfully integrated resume content into the About page with clear section demarcation
-⏳ Deployment: Deploy the website on Replit
+✅ Home Page Enhancement: Improved layout and content presentation
 ⏳ Projects Section Update: Display a 'Coming Soon' placeholder for project updates
 
 #### Phase 3: Dynamic Project Uploads
@@ -39,7 +48,8 @@ A modern, responsive personal portfolio website designed to showcase professiona
 - Admin Content Control: Allow for adding/editing projects without modifying code
 - Project Filtering & Search: Implement search and filter functionality
 
-#### Phase 4: Additional Enhancements
+#### Phase 4: Additional Enhancements & Deployment
+- Deployment: Deploy the website on Replit
 - Blog Section: Add a blog to share professional insights or tutorials
 - Testimonials Section: Include feedback from clients or recommendations
 - Newsletter Signup: Add an email capture form for networking updates
@@ -70,7 +80,7 @@ A modern, responsive personal portfolio website designed to showcase professiona
 - Website Analytics: Track visitor metrics and engagement with a dashboard
 
 ### Notes
-- The website is currently deployed on Replit
+- The website is currently in development
 - Database is provisioned and running
 - All core functionality is working as expected
 
