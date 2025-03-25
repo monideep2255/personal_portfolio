@@ -8,7 +8,7 @@ Key Technologies:
 - Next.js frontend framework
 - Tailwind CSS for styling
 - React Icons library
-- next-themes for dark mode implementation
+- Next-themes for dark mode implementation
 - PostgreSQL for contact form data storage
 - Responsive design with clear section demarcation
 - Modular page components for About, Home, and Projects sections
@@ -52,9 +52,6 @@ Key Technologies:
 
 #### Phase 4: Additional Enhancements & Deployment
 - Deployment: Deploy the website on Replit
-- Blog Section: Add a blog to share professional insights or tutorials
-- Testimonials Section: Include feedback from clients or recommendations
-- Newsletter Signup: Add an email capture form for networking updates
 - AI-Powered Resume Summary: Generate a brief bio based on the resume content
 - Custom 404 Page: Improve UX with a designed error page
 - Performance Optimization: Improve Lighthouse scores (speed, SEO, accessibility)
