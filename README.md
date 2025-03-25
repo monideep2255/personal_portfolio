@@ -129,6 +129,16 @@ npm run dev
 
 5. Open [http://localhost:5000](http://localhost:5000) in your browser
 
+### 🚀 Deployment
+
+This project can be deployed for free using Replit's deployment options:
+
+1. Click the "Deploy" button in the Replit workspace
+2. Choose "Static Deploy" for the frontend (it's free and fast)
+3. Configure your deployment settings if needed
+4. Click "Deploy" to publish your site
+5. Your site will be live at `your-repl-name.replit.app`
+
 ### Features
 - Full project management system with CRUD operations
 - Protected admin routes with authentication
