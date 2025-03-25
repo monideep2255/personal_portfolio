@@ -88,7 +88,7 @@ Key Technologies:
 - PostgreSQL database
 - npm v10.x or higher
 
-### Installation & Development
+### Installation & Setup
 
 1. Clone the repository
 ```bash
@@ -140,7 +140,7 @@ npm run dev
 
 The site will be accessible at `http://0.0.0.0:5000`
 
-5. Open [http://localhost:5000](http://localhost:5000) in your browser
+6. Open [http://0.0.0.0:5000](http://0.0.0.0:5000) in your browser
 
 ## 📝 Project Structure
 
