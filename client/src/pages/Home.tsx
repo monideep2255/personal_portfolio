@@ -12,9 +12,27 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-bold mb-6">
-            Product Manager & Tech Innovation Leader
+          <motion.p 
+            className="text-xl mb-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            👋 Hi, I'm
+          </motion.p>
+
+          <h1 className="text-5xl font-bold mb-4">
+            Monideep Chakraborti
           </h1>
+
+          <motion.h2
+            className="text-3xl text-primary font-semibold mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            Product Manager & AI/ML Specialist
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0 }}
@@ -22,9 +40,7 @@ export default function Home() {
             transition={{ delay: 0.5 }}
             className="text-xl text-muted-foreground mb-8 leading-relaxed"
           >
-            Welcome! I'm passionate about transforming complex AI/ML technologies into user-friendly solutions 
-            at NCBI, NIH. With expertise in product management and artificial intelligence, 
-            I focus on innovations that advance biomedical research and enhance user experiences.
+            Welcome! I'm passionate about transforming complex AI/ML technologies into user-friendly solutions at NCBI, NIH. With expertise in product management and artificial intelligence, I focus on innovations that advance biomedical research and enhance user experiences.
           </motion.p>
 
           <motion.div
@@ -35,11 +51,11 @@ export default function Home() {
           >
             <Button asChild>
               <a href="/projects">
-                View Projects <ArrowRight className="ml-2 h-4 w-4" />
+                View My Work <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
             <Button variant="outline" asChild>
-              <a href="/contact">Contact Me</a>
+              <a href="/contact">Get in Touch</a>
             </Button>
           </motion.div>
         </motion.div>
