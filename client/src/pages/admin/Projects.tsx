@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { toast } from "@/hooks/use-toast";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import type { Project } from "@shared/schema";
@@ -12,9 +12,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, LogOut } from "lucide-react";
 
 export default function AdminProjects() {
+  const [, setLocation] = useLocation();
   const { data: projects, isLoading } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
   });
@@ -39,6 +40,19 @@ export default function AdminProjects() {
     },
   });
 
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await apiRequest("POST", "/api/auth/logout");
+    },
+    onSuccess: () => {
+      setLocation("/admin/login");
+      toast({
+        title: "Success",
+        description: "Logged out successfully",
+      });
+    },
+  });
+
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -53,12 +67,18 @@ export default function AdminProjects() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Manage Projects</h1>
-        <Button asChild>
-          <Link href="/admin/projects/new">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Project
-          </Link>
-        </Button>
+        <div className="flex gap-4">
+          <Button asChild>
+            <Link href="/admin/projects/new">
+              <Plus className="mr-2 h-4 w-4" />
+              Add Project
+            </Link>
+          </Button>
+          <Button variant="outline" onClick={() => logoutMutation.mutate()}>
+            <LogOut className="mr-2 h-4 w-4" />
+            Logout
+          </Button>
+        </div>
       </div>
 
       <div className="border rounded-lg">
@@ -66,7 +86,7 @@ export default function AdminProjects() {
           <TableHeader>
             <TableRow>
               <TableHead>Title</TableHead>
-              <TableHead>Technologies</TableHead>
+              <TableHead>Description</TableHead>
               <TableHead>Featured</TableHead>
               <TableHead className="w-[100px]">Actions</TableHead>
             </TableRow>
@@ -75,7 +95,7 @@ export default function AdminProjects() {
             {projects?.map((project) => (
               <TableRow key={project.id}>
                 <TableCell className="font-medium">{project.title}</TableCell>
-                <TableCell>{project.technologies.join(", ")}</TableCell>
+                <TableCell>{project.description}</TableCell>
                 <TableCell>{project.featured ? "Yes" : "No"}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">

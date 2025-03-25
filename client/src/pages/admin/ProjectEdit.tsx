@@ -22,7 +22,7 @@ import { Switch } from "@/components/ui/switch";
 export default function ProjectEdit({ params }: { params: { id: string } }) {
   const [, setLocation] = useLocation();
   const isNew = params.id === "new";
-  
+
   const { data: project, isLoading: isLoadingProject } = useQuery<Project>({
     queryKey: [`/api/projects/${params.id}`],
     enabled: !isNew,
@@ -30,14 +30,13 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
 
   const form = useForm<InsertProject>({
     resolver: zodResolver(insertProjectSchema),
-    defaultValues: project || {
+    defaultValues: {
       title: "",
       description: "",
-      technologies: [],
       githubUrl: "",
       liveUrl: "",
-      imageUrl: "",
       featured: false,
+      ...project
     },
   });
 
@@ -111,32 +110,10 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
 
           <FormField
             control={form.control}
-            name="technologies"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Technologies (comma-separated)</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    value={field.value?.join(", ") || ""}
-                    onChange={(e) =>
-                      field.onChange(
-                        e.target.value.split(",").map((tech) => tech.trim())
-                      )
-                    }
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="githubUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>GitHub URL</FormLabel>
+                <FormLabel>GitHub URL (optional)</FormLabel>
                 <FormControl>
                   <Input {...field} type="url" />
                 </FormControl>
@@ -151,20 +128,6 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Live URL (optional)</FormLabel>
-                <FormControl>
-                  <Input {...field} type="url" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Image URL (optional)</FormLabel>
                 <FormControl>
                   <Input {...field} type="url" />
                 </FormControl>
