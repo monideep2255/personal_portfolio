@@ -81,7 +81,7 @@ Key Technologies:
 - Website Analytics: Track visitor metrics and engagement with a dashboard
 - Minor changes: Add background picture and improve text on the website
 
-## 🚀 Getting Started
+## 🛠️ Local Development Setup
 
 ### Prerequisites
 - Node.js v20.18.1 or higher
