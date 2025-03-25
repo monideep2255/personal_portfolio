@@ -16,7 +16,7 @@ export function Navbar() {
         <Link href="/">
           <a className="text-xl font-bold flex items-center gap-2">
             <KanbanSquare className="h-8 w-8 text-primary" />
-            <span>Portfolio</span>
+            <span>Monideep's Portfolio</span>
           </a>
         </Link>
 
