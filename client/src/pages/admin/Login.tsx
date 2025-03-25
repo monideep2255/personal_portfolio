@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { apiRequest } from "@/lib/queryClient";
 import { toast } from "@/hooks/use-toast";
+import { queryClient } from "@/lib/queryClient";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -39,11 +40,19 @@ export default function Login() {
     setIsLoading(true);
     try {
       await apiRequest("POST", "/api/auth/login", data);
+
+      // Invalidate the auth status query to force a refresh
+      await queryClient.invalidateQueries({ queryKey: ["/api/auth/status"] });
+
       toast({
         title: "Success",
         description: "Logged in successfully",
       });
-      setLocation("/admin/projects");
+
+      // Small delay to ensure auth state is updated
+      setTimeout(() => {
+        setLocation("/admin/projects");
+      }, 100);
     } catch (error) {
       toast({
         variant: "destructive",
