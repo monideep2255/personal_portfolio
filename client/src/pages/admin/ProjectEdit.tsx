@@ -30,7 +30,6 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
       description: "",
       githubUrl: "",
       liveUrl: "",
-      imageUrl: "",
       featured: false,
     },
   });
@@ -93,25 +92,6 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
                 <FormLabel>Description</FormLabel>
                 <FormControl>
                   <Textarea {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Image URL (optional)</FormLabel>
-                <FormControl>
-                  <Input 
-                    placeholder="https://example.com/image.jpg"
-                    {...field}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.value || null)}
-                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
