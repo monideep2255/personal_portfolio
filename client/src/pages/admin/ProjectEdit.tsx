@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,11 +23,6 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
   const [, setLocation] = useLocation();
   const isNew = params.id === "new";
 
-  const { data: project, isLoading: isLoadingProject } = useQuery<Project>({
-    queryKey: [`/api/projects/${params.id}`],
-    enabled: !isNew,
-  });
-
   const form = useForm<InsertProject>({
     resolver: zodResolver(insertProjectSchema),
     defaultValues: {
@@ -36,7 +31,6 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
       githubUrl: "",
       liveUrl: "",
       featured: false,
-      ...project
     },
   });
 
@@ -64,10 +58,6 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
       });
     },
   });
-
-  if (!isNew && isLoadingProject) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -115,7 +105,12 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
               <FormItem>
                 <FormLabel>GitHub URL (optional)</FormLabel>
                 <FormControl>
-                  <Input {...field} type="url" />
+                  <Input 
+                    placeholder="https://github.com/..."
+                    {...field}
+                    value={field.value || ""}
+                    onChange={(e) => field.onChange(e.target.value || null)}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -129,7 +124,12 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
               <FormItem>
                 <FormLabel>Live URL (optional)</FormLabel>
                 <FormControl>
-                  <Input {...field} type="url" />
+                  <Input 
+                    placeholder="https://..."
+                    {...field}
+                    value={field.value || ""}
+                    onChange={(e) => field.onChange(e.target.value || null)}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
