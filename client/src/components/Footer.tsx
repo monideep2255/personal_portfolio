@@ -1,4 +1,3 @@
-
 import { SiGithub, SiLinkedin } from "react-icons/si";
 
 export function Footer() {
@@ -10,7 +9,7 @@ export function Footer() {
             © {new Date().getFullYear()} Portfolio. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+            <a href="https://github.com/monideep2255" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
               <SiGithub className="w-5 h-5" />
             </a>
             <a href="https://www.linkedin.com/in/monideepc/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
