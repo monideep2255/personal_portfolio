@@ -88,7 +88,7 @@ Key Technologies:
 - PostgreSQL database
 - npm v10.x or higher
 
-### Installation
+### Installation & Development
 
 1. Clone the repository
 ```bash
@@ -121,6 +121,33 @@ npm run dev
 6. Open [http://0.0.0.0:5000](http://0.0.0.0:5000) in your browser
 
 The application will start in development mode with hot-reload enabled.
+
+### Alternative Free Deployment Options
+
+While Replit offers the most streamlined deployment experience, here are other free options:
+
+1. **Render.com**
+   - Create a new Web Service
+   - Connect your GitHub repository
+   - Set build command: `npm run build`
+   - Set start command: `npm run start`
+   - Add your environment variables
+   - Deploy
+
+2. **Railway.app**
+   - Connect your GitHub repository
+   - Configure environment variables
+   - Railway will auto-detect build settings
+   - Deploy
+
+3. **Netlify**
+   - Connect your GitHub repository
+   - Set build command: `npm run build`
+   - Set publish directory: `dist`
+   - Configure environment variables
+   - Deploy
+
+Note: For optimal development experience and seamless deployment, we recommend using Replit's built-in deployment features.
 
 ### 🚀 Deployment
 
