@@ -127,6 +127,28 @@ SENDGRID_API_KEY=your_sendgrid_api_key
 npm run dev
 ```
 
+### Self-Hosting Setup
+If you need to run this project on your own machine during development:
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Set up environment variables in `.env`:
+```env
+DATABASE_URL=your_postgresql_database_url
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
+```
+
+3. Start development server:
+```bash
+npm run dev
+```
+
+The site will be accessible at `http://0.0.0.0:5000`
+
 6. Open [http://0.0.0.0:5000](http://0.0.0.0:5000) in your browser
 
 The application will start in development mode with hot-reload enabled.
