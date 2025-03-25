@@ -1,5 +1,8 @@
 # Personal Portfolio Website
 
+### Link To Project
+![Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
+
 ### Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
 
@@ -77,18 +80,7 @@ Key Technologies:
 - Email Notifications: Set up email service for form submissions
 - Content Management System (CMS): Consider a headless CMS for better project/blog management
 - Website Analytics: Track visitor metrics and engagement with a dashboard
-
-## 📸 Screenshots
-
-### Home Page
-![Home Page]()
-
-### Projects Page
-![Projects Page]()
-
-### Resume Section
-![Resume Page 1]()
-![Resume Page 2]()
+- Minor changes: Add background picture and improve text on the website
 
 ## 🚀 Getting Started
 
