@@ -1,10 +1,10 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { insertMessageSchema, insertProjectSchema } from "@shared/schema";
+import { insertProjectSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ZodError } from "zod";
-import { sendContactNotification } from "./emailService";
+import { requireAuth } from "./auth";
 
 export async function registerRoutes(app: Express) {
   // Contact form endpoint
@@ -37,6 +37,7 @@ export async function registerRoutes(app: Express) {
       const projects = await storage.getProjects();
       res.json(projects);
     } catch (error) {
+      console.error("Failed to fetch projects:", error);
       res.status(500).json({ message: "Failed to fetch projects" });
     }
   });
@@ -46,6 +47,7 @@ export async function registerRoutes(app: Express) {
       const projects = await storage.getFeaturedProjects();
       res.json(projects);
     } catch (error) {
+      console.error("Failed to fetch featured projects:", error);
       res.status(500).json({ message: "Failed to fetch featured projects" });
     }
   });
@@ -58,16 +60,19 @@ export async function registerRoutes(app: Express) {
       }
       res.json(project);
     } catch (error) {
+      console.error("Failed to fetch project:", error);
       res.status(500).json({ message: "Failed to fetch project" });
     }
   });
 
-  app.post("/api/projects", async (req, res) => {
+  // Protected routes
+  app.post("/api/projects", requireAuth, async (req, res) => {
     try {
       const projectData = insertProjectSchema.parse(req.body);
       const project = await storage.createProject(projectData);
       res.status(201).json(project);
     } catch (error) {
+      console.error("Failed to create project:", error);
       if (error instanceof ZodError) {
         res.status(400).json({ message: fromZodError(error).message });
       } else {
@@ -76,12 +81,16 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.patch("/api/projects/:id", async (req, res) => {
+  app.patch("/api/projects/:id", requireAuth, async (req, res) => {
     try {
       const projectData = insertProjectSchema.partial().parse(req.body);
       const project = await storage.updateProject(Number(req.params.id), projectData);
+      if (!project) {
+        return res.status(404).json({ message: "Project not found" });
+      }
       res.json(project);
     } catch (error) {
+      console.error("Failed to update project:", error);
       if (error instanceof ZodError) {
         res.status(400).json({ message: fromZodError(error).message });
       } else {
@@ -90,11 +99,12 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  app.delete("/api/projects/:id", async (req, res) => {
+  app.delete("/api/projects/:id", requireAuth, async (req, res) => {
     try {
       await storage.deleteProject(Number(req.params.id));
       res.status(204).send();
     } catch (error) {
+      console.error("Failed to delete project:", error);
       res.status(500).json({ message: "Failed to delete project" });
     }
   });
