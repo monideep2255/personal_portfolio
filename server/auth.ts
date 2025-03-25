@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -11,7 +11,7 @@ export function configureAuth(app: Express) {
   app.post("/api/auth/login", async (req, res) => {
     try {
       const credentials = loginSchema.parse(req.body);
-      
+
       if (
         credentials.username === process.env.ADMIN_USERNAME &&
         credentials.password === process.env.ADMIN_PASSWORD
@@ -24,6 +24,11 @@ export function configureAuth(app: Express) {
     } catch (error) {
       res.status(400).json({ message: "Invalid request" });
     }
+  });
+
+  // Check auth status endpoint
+  app.get("/api/auth/status", (req, res) => {
+    res.json({ isAuthenticated: req.session.isAuthenticated === true });
   });
 
   // Logout endpoint
@@ -40,7 +45,7 @@ export function configureAuth(app: Express) {
 
 // Middleware to protect admin routes
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
-  if (req.session.isAuthenticated) {
+  if (req.session.isAuthenticated === true) {
     next();
   } else {
     res.status(401).json({ message: "Unauthorized" });
