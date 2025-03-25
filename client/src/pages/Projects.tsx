@@ -83,15 +83,6 @@ export default function Projects() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                {project.imageUrl && (
-                  <div className="mb-4 rounded-lg overflow-hidden">
-                    <img 
-                      src={project.imageUrl} 
-                      alt={project.title}
-                      className="w-full h-48 object-cover"
-                    />
-                  </div>
-                )}
                 <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
                 <p className="text-muted-foreground mb-6">{project.description}</p>
                 <div className="flex gap-4">

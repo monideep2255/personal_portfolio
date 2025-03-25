@@ -15,7 +15,6 @@ export const projects = pgTable("projects", {
   description: text("description").notNull(),
   githubUrl: varchar("github_url", { length: 255 }),
   liveUrl: varchar("live_url", { length: 255 }),
-  imageUrl: varchar("image_url", { length: 255 }),
   featured: boolean("featured").default(false),
 });
 
@@ -35,14 +34,12 @@ export const insertProjectSchema = createInsertSchema(projects).pick({
   description: true,
   githubUrl: true,
   liveUrl: true,
-  imageUrl: true,
   featured: true,
 }).extend({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
   githubUrl: z.string().url("Invalid URL").optional().nullable(),
   liveUrl: z.string().url("Invalid URL").optional().nullable(),
-  imageUrl: z.string().url("Invalid URL").optional().nullable(),
   featured: z.boolean().default(false),
 });
 
