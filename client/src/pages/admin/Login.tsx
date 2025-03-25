@@ -37,11 +37,11 @@ export default function Login() {
   });
 
   async function onSubmit(data: LoginForm) {
+    if (isLoading) return; // Prevent double submission
     setIsLoading(true);
+
     try {
       await apiRequest("POST", "/api/auth/login", data);
-
-      // Invalidate the auth status query to force a refresh
       await queryClient.invalidateQueries({ queryKey: ["/api/auth/status"] });
 
       toast({
@@ -49,10 +49,7 @@ export default function Login() {
         description: "Logged in successfully",
       });
 
-      // Small delay to ensure auth state is updated
-      setTimeout(() => {
-        setLocation("/admin/projects");
-      }, 100);
+      setLocation("/admin/projects");
     } catch (error) {
       toast({
         variant: "destructive",
