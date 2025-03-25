@@ -13,7 +13,7 @@ export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 100 }).notNull(),
   description: text("description").notNull(),
-  githubUrl: varchar("github_url", { length: 255 }).notNull(),
+  githubUrl: varchar("github_url", { length: 255 }),
   liveUrl: varchar("live_url", { length: 255 }),
   featured: boolean("featured").default(false),
 });
@@ -35,6 +35,10 @@ export const insertProjectSchema = createInsertSchema(projects).pick({
   githubUrl: true,
   liveUrl: true,
   featured: true,
+}).extend({
+  githubUrl: z.string().url("Invalid URL").optional(),
+  liveUrl: z.string().url("Invalid URL").optional(),
+  featured: z.boolean().optional(),
 });
 
 export type InsertProject = z.infer<typeof insertProjectSchema>;
