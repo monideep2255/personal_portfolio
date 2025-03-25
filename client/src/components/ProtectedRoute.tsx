@@ -6,8 +6,9 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [, setLocation] = useLocation();
   const { data, isLoading } = useQuery({
     queryKey: ["/api/auth/status"],
-    staleTime: 0, // Always fetch fresh data
-    cacheTime: 0, // Don't cache the result
+    retry: false,
+    refetchOnWindowFocus: false,
+    gcTime: 0
   });
 
   useEffect(() => {
