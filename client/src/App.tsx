@@ -10,6 +10,8 @@ import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import AdminProjects from "@/pages/admin/Projects";
+import AdminProjectEdit from "@/pages/admin/ProjectEdit";
 
 function Router() {
   return (
@@ -21,6 +23,8 @@ function Router() {
           <Route path="/projects" component={Projects} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
+          <Route path="/admin/projects" component={AdminProjects} />
+          <Route path="/admin/projects/:id" component={AdminProjectEdit} />
           <Route component={NotFound} />
         </Switch>
       </main>
