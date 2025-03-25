@@ -149,13 +149,34 @@ Last Updated: March 20, 2025
 
 ### 🚀 Deployment
 
-This project can be deployed for free using Replit's deployment options:
-
+#### Recommended: Deploy on Replit (Free & Easy)
 1. Click the "Deploy" button in the Replit workspace
 2. Choose "Static Deploy" for the frontend (it's free and fast)
 3. Configure your deployment settings if needed
 4. Click "Deploy" to publish your site
 5. Your site will be live at `your-repl-name.replit.app`
+
+#### Self-Hosting Setup
+If you need to run this project on your own machine during development:
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Set up environment variables in `.env`:
+```env
+DATABASE_URL=your_postgresql_database_url
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
+```
+
+3. Start development server:
+```bash
+npm run dev
+```
+
+The site will be accessible at `http://0.0.0.0:5000`
 
 ### Features
 - Full project management system with CRUD operations
