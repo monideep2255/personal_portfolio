@@ -127,7 +127,9 @@ SENDGRID_API_KEY=your_sendgrid_api_key
 npm run dev
 ```
 
-5. Open [http://localhost:5000](http://localhost:5000) in your browser
+6. Open [http://0.0.0.0:5000](http://0.0.0.0:5000) in your browser
+
+The application will start in development mode with hot-reload enabled.
 
 ### 🚀 Deployment
 
