@@ -1,7 +1,7 @@
 # Personal Portfolio Website
 
 ### Link To Project
-![Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
+[Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
 
 ### Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
@@ -38,20 +38,19 @@ Key Technologies:
 ##### Technical Features
 - Contact Form Database (PostgreSQL integration, API endpoint, validation with Zod)
 - Component Library (Reusable UI components using shadcn/ui)
-
-✅ Functional Status: Navigation, theme switching, contact form, responsive design, project showcase, and about page are implemented.
+- Functional Status: Navigation, theme switching, contact form, responsive design, project showcase, and about page are implemented.
 
 #### Phase 2: Content & Polish (✅ Completed) – March 20, 2025
-✅ Resume Section: Successfully integrated resume content into the About page with clear section demarcation
-✅ Home Page Enhancement: Improved layout and content presentation
-✅ Projects Section Update: Projects page "Coming Soon" update completed.
+- Resume Section: Successfully integrated resume content into the About page with clear section demarcation
+- Home Page Enhancement: Improved layout and content presentation
+- Projects Section Update: Projects page "Coming Soon" update completed.
 
 #### Phase 3: Dynamic Project Uploads (✅ Completed) – March 25, 2025
-✅ Project Management: Implemented full CRUD operations for project management
-✅ Admin Content Control: Added secure admin interface for project management
-✅ Project Filtering & Search: Implemented search functionality and featured project filter
-✅ Database Integration: Successfully integrated PostgreSQL for project storage
-✅ Protected Routes: Implemented authentication for admin features
+- Project Management: Implemented full CRUD operations for project management
+- Admin Content Control: Added secure admin interface for project management
+- Project Filtering & Search: Implemented search functionality and featured project filter
+- Database Integration: Successfully integrated PostgreSQL for project storage
+- Protected Routes: Implemented authentication for admin features
 
 #### Phase 4: Additional Enhancements & Deployment (🚧 In Progress)
 - Image Upload: Planning to add image upload functionality for projects
