@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ThemeToggle } from "./ThemeToggle";
+import { KanbanSquare } from "lucide-react";
 
 export function Navbar() {
   const links = [
@@ -14,7 +15,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/">
           <a className="text-xl font-bold flex items-center gap-2">
-            <img src="/logo.png" alt="Logo" className="h-8 w-8" />
+            <KanbanSquare className="h-8 w-8 text-primary" />
             <span>Portfolio</span>
           </a>
         </Link>
