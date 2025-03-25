@@ -88,7 +88,7 @@ Key Technologies:
 ![Home Page]()
 
 ### Projects Page
-![Projects Page](
+![Projects Page]()
 
 ### Resume Section
 ![Resume Page 1]()
