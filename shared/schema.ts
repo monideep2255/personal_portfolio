@@ -36,8 +36,8 @@ export const insertProjectSchema = createInsertSchema(projects).pick({
   liveUrl: true,
   featured: true,
 }).extend({
-  githubUrl: z.string().url("Invalid URL").optional(),
-  liveUrl: z.string().url("Invalid URL").optional(),
+  githubUrl: z.string().url("Invalid URL").optional().nullable(),
+  liveUrl: z.string().url("Invalid URL").optional().nullable(),
   featured: z.boolean().optional(),
 });
 
