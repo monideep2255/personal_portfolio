@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import NotFound from "@/pages/not-found";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import About from "@/pages/About";
@@ -25,8 +26,20 @@ function Router() {
           <Route path="/projects" component={Projects} />
           <Route path="/contact" component={Contact} />
           <Route path="/admin/login" component={AdminLogin} />
-          <Route path="/admin/projects" component={AdminProjects} />
-          <Route path="/admin/projects/:id" component={AdminProjectEdit} />
+          <Route path="/admin/projects">
+            {() => (
+              <ProtectedRoute>
+                <AdminProjects />
+              </ProtectedRoute>
+            )}
+          </Route>
+          <Route path="/admin/projects/:id">
+            {(params) => (
+              <ProtectedRoute>
+                <AdminProjectEdit params={params} />
+              </ProtectedRoute>
+            )}
+          </Route>
           <Route component={NotFound} />
         </Switch>
       </main>
