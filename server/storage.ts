@@ -29,8 +29,7 @@ export class DatabaseStorage implements IStorage {
   async getProjects(): Promise<Project[]> {
     return await db
       .select()
-      .from(projects)
-      .orderBy(projects.createdAt);
+      .from(projects);
   }
 
   async getProjectById(id: number): Promise<Project | undefined> {
@@ -68,8 +67,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(projects)
-      .where(eq(projects.featured, true))
-      .orderBy(projects.createdAt);
+      .where(eq(projects.featured, true));
   }
 }
 

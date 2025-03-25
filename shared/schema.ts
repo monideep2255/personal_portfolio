@@ -1,4 +1,4 @@
-import { pgTable, text, serial, varchar, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, varchar, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -13,13 +13,9 @@ export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 100 }).notNull(),
   description: text("description").notNull(),
-  technologies: text("technologies").array().notNull(),
   githubUrl: varchar("github_url", { length: 255 }).notNull(),
   liveUrl: varchar("live_url", { length: 255 }),
-  imageUrl: varchar("image_url", { length: 255 }),
   featured: boolean("featured").default(false),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 // Contact Message schemas
@@ -36,10 +32,8 @@ export type ContactMessage = typeof contactMessages.$inferSelect;
 export const insertProjectSchema = createInsertSchema(projects).pick({
   title: true,
   description: true,
-  technologies: true,
   githubUrl: true,
   liveUrl: true,
-  imageUrl: true,
   featured: true,
 });
 
