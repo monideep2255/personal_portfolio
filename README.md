@@ -118,6 +118,28 @@ npm run db:push
 npm run dev
 ```
 
+### Self-Hosting Setup
+If you need to run this project on your own machine during development:
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Set up environment variables in `.env`:
+```env
+DATABASE_URL=your_postgresql_database_url
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
+```
+
+3. Start development server:
+```bash
+npm run dev
+```
+
+The site will be accessible at `http://0.0.0.0:5000`
+
 5. Open [http://localhost:5000](http://localhost:5000) in your browser
 
 ## 📝 Project Structure
@@ -147,7 +169,19 @@ This project is private and not licensed for public use.
 
 Last Updated: March 20, 2025
 
-### Alternative Free Deployment Options
+
+## 🚀 Deployment
+
+Note: For optimal development experience and seamless deployment, we recommend using Replit's built-in deployment features.
+
+#### Recommended: Deploy on Replit (Free & Easy)
+1. Click the "Deploy" button in the Replit workspace
+2. Choose "Static Deploy" for the frontend (it's free and fast)
+3. Configure your deployment settings if needed
+4. Click "Deploy" to publish your site
+5. Your site will be live at `your-repl-name.replit.app`
+
+#### Alternative Free Deployment Options
 
 While Replit offers the most streamlined deployment experience, here are other free options:
 
@@ -171,45 +205,5 @@ While Replit offers the most streamlined deployment experience, here are other f
    - Set publish directory: `dist`
    - Configure environment variables
    - Deploy
-
-Note: For optimal development experience and seamless deployment, we recommend using Replit's built-in deployment features.
-
-### 🚀 Deployment
-
-#### Recommended: Deploy on Replit (Free & Easy)
-1. Click the "Deploy" button in the Replit workspace
-2. Choose "Static Deploy" for the frontend (it's free and fast)
-3. Configure your deployment settings if needed
-4. Click "Deploy" to publish your site
-5. Your site will be live at `your-repl-name.replit.app`
-
-#### Self-Hosting Setup
-If you need to run this project on your own machine during development:
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Set up environment variables in `.env`:
-```env
-DATABASE_URL=your_postgresql_database_url
-ADMIN_USERNAME=your_admin_username
-ADMIN_PASSWORD=your_admin_password
-```
-
-3. Start development server:
-```bash
-npm run dev
-```
-
-The site will be accessible at `http://0.0.0.0:5000`
-
-### Features
-- Full project management system with CRUD operations
-- Protected admin routes with authentication
-- Search and filter functionality for projects
-- Responsive design for all screen sizes
-- Dark/light theme support
 
 Last Updated: March 25, 2025
