@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import LoadingFallback from "@/components/LoadingFallback";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 // Lazy load route components
 const Home = lazy(() => import("@/pages/Home"));
@@ -21,6 +22,9 @@ const AdminProjectEdit = lazy(() => import("@/pages/admin/ProjectEdit"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Router() {
+  // Initialize analytics tracking
+  useAnalytics();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
