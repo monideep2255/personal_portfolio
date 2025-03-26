@@ -97,7 +97,14 @@ Key Technologies:
   - Email notification service
   - Content Management System (CMS)
   - Advanced search with filters and tags
+<<<<<<< HEAD
 >>>>>>> 354acaa (Assistant checkpoint: Update Phase 4 features in README.md)
+=======
+  - Image Upload: Implemented secure image upload functionality for projects
+  - Custom 404 Page: Enhanced UX with a professionally designed error page
+  - Performance Optimization: Improved Lighthouse scores (speed, SEO, accessibility)
+  - Accessibility Features: Added ARIA labels, keyboard navigation, and screen-reader support
+>>>>>>> a5dd3ad (Assistant checkpoint: Added missing features to Phase 4 in README.md)
 
 #### Admin Access Instructions
 To access the admin interface and analytics:
