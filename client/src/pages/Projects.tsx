@@ -84,8 +84,12 @@ export default function Projects() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="mb-6 rounded-lg overflow-hidden bg-muted/30">
-                  <ProjectPattern seed={project.id} className="w-full" />
+                <div className="mb-6 rounded-lg overflow-hidden">
+                  <ProjectPattern
+                    seed={project.id}
+                    title={project.title}
+                    className="w-full max-w-[120px] mx-auto"
+                  />
                 </div>
                 <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
                 <p className="text-muted-foreground mb-6">{project.description}</p>
