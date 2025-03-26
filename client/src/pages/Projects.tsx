@@ -4,36 +4,42 @@ import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, Search } from "lucide-react";
 import type { Project } from "@shared/schema";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { ProjectPattern } from "@/components/ProjectPattern";
+import LoadingFallback from "@/components/LoadingFallback";
 
 export default function Projects() {
   const { data: projects, isLoading } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
   });
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showFeatured, setShowFeatured] = useState(false);
 
-  // Filter projects based on search query and featured status
-  const filteredProjects = projects?.filter((project) => {
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase());
+  // Memoize filter function
+  const filteredProjects = useMemo(() => {
+    return projects?.filter((project) => {
+      const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesFeatured = showFeatured ? project.featured : true;
+      const matchesFeatured = showFeatured ? project.featured : true;
 
-    return matchesSearch && matchesFeatured;
-  });
+      return matchesSearch && matchesFeatured;
+    });
+  }, [projects, searchQuery, showFeatured]);
+
+  // Memoize event handlers
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  }, []);
+
+  const toggleFeatured = useCallback(() => {
+    setShowFeatured(prev => !prev);
+  }, []);
 
   if (isLoading) {
-    return (
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-8">Projects</h1>
-          <p>Loading projects...</p>
-        </div>
-      </section>
-    );
+    return <LoadingFallback />;
   }
 
   if (!projects?.length) {
@@ -58,14 +64,14 @@ export default function Projects() {
               type="text"
               placeholder="Search projects..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange}
               className="pl-10"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           </div>
           <Button
             variant={showFeatured ? "default" : "outline"}
-            onClick={() => setShowFeatured(!showFeatured)}
+            onClick={toggleFeatured}
             className="md:w-auto w-full"
           >
             {showFeatured ? "Show All" : "Featured Only"}
