@@ -1,10 +1,11 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { insertProjectSchema } from "@shared/schema";
+import { insertProjectSchema, insertMessageSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ZodError } from "zod";
 import { requireAuth } from "./auth";
+import { sendContactNotification } from "./emailService";
 
 export async function registerRoutes(app: Express) {
   // Contact form endpoint
@@ -32,41 +33,6 @@ export async function registerRoutes(app: Express) {
   });
 
   // Project endpoints
-  app.get("/api/projects", async (_req, res) => {
-    try {
-      const projects = await storage.getProjects();
-      res.json(projects);
-    } catch (error) {
-      console.error("Failed to fetch projects:", error);
-      res.status(500).json({ message: "Failed to fetch projects" });
-    }
-  });
-
-  app.get("/api/projects/featured", async (_req, res) => {
-    try {
-      const projects = await storage.getFeaturedProjects();
-      res.json(projects);
-    } catch (error) {
-      console.error("Failed to fetch featured projects:", error);
-      res.status(500).json({ message: "Failed to fetch featured projects" });
-    }
-  });
-
-  app.get("/api/projects/:id", async (req, res) => {
-    try {
-      const project = await storage.getProjectById(Number(req.params.id));
-      if (!project) {
-        return res.status(404).json({ message: "Project not found" });
-      }
-      res.json(project);
-    } catch (error) {
-      console.error("Failed to fetch project:", error);
-      res.status(500).json({ message: "Failed to fetch project" });
-    }
-  });
-
-  // Protected routes
-  // Public routes
   app.get("/api/projects", async (_req, res) => {
     try {
       const projects = await storage.getProjects();
