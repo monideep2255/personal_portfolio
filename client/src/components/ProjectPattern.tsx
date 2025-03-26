@@ -14,7 +14,7 @@ export function ProjectPattern({ seed, title, className = "" }: ProjectPatternPr
       return x - Math.floor(x);
     };
 
-    // Generate colors
+    // Generate colors with better caching
     const hue = Math.floor(random(seed + 200) * 360);
     const backgroundColor = `hsl(${hue}, 70%, 85%)`;
     const textColor = `hsl(${hue}, 70%, 35%)`;
@@ -23,19 +23,23 @@ export function ProjectPattern({ seed, title, className = "" }: ProjectPatternPr
       backgroundColor,
       textColor
     };
-  }, [seed]);
+  }, [seed]); // Memoize based on seed only
 
-  const firstLetter = title.charAt(0).toUpperCase();
+  const firstLetter = useMemo(() => 
+    title.charAt(0).toUpperCase()
+  , [title]);
 
   return (
     <div 
-      className={`aspect-square rounded-lg flex items-center justify-center font-bold text-3xl ${className}`}
+      className={`aspect-square rounded-lg flex items-center justify-center font-bold text-3xl transition-all duration-300 hover:scale-105 ${className}`}
       style={{ 
         backgroundColor: pattern.backgroundColor,
         color: pattern.textColor,
         minHeight: "80px",
         maxHeight: "120px"
       }}
+      role="img"
+      aria-label={`${title} project icon`}
     >
       {firstLetter}
     </div>
