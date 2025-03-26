@@ -1,8 +1,6 @@
-import { contactMessages, projects, type Project, type InsertProject, type ContactMessage, type InsertMessage } from "@shared/schema";
+import { contactMessages, projects, analytics, type Project, type InsertProject, type ContactMessage, type InsertMessage, type Analytics, type InsertAnalytics } from "@shared/schema";
 import { db } from "./db";
 import { eq, gte, lte, desc } from "drizzle-orm";
-import { type Analytics, type InsertAnalytics } from "./analytics"; // Assuming analytics schema is defined elsewhere
-
 
 export interface IStorage {
   // Projects
