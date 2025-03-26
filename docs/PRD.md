@@ -65,22 +65,16 @@ A modern, responsive personal portfolio management system designed for seamless 
   - Data visualization with charts (bar charts and pie charts)
   - Secure analytics data access for administrators
   - Added logout functionality in the analytics dashboard
+  - Email Notifications: Set up email service for form submissions and notifications
+  - Content Management System (CMS): Implement a headless CMS for better content management
+  - Website Analytics: Track visitor metrics and engagement with a dashboard
+  - Search Enhancement: Implement advanced search with filters and tags
 
 #### Phase 5: Future Enhancements (🚧 Planned)
-- Email Notifications: Set up email service for form submissions and notifications
-- Content Management System (CMS): Implement a headless CMS for better content management
-- Website Analytics: Track visitor metrics and engagement with a dashboard
-- Image Upload System: Add support for custom project images and media
-- Search Enhancement: Implement advanced search with filters and tags
+
 - Blog System: Add a blog section with rich text editing and categories
 - Technical Documentation: Add a documentation section for technical write-ups
 - Newsletter Integration: Add subscription functionality for updates
-
-#### Future Considerations
-- Image Upload System: Implement secure image upload and storage
-- Email Notifications: Set up email service for form submissions
-- Content Management System (CMS): Consider a headless CMS for better project/blog management
-- Website Analytics: Track visitor metrics and engagement with a dashboard
 - Minor changes: Add background picture and improve text on the website
 
 #### Key Technologies:
