@@ -61,6 +61,10 @@ A modern, responsive personal portfolio management system designed for seamless 
   - Email notification service
   - Content Management System (CMS)
   - Advanced search with filters and tags
+  - Image Upload: Implemented secure image upload functionality for projects
+  - Custom 404 Page: Enhanced UX with a professionally designed error page
+  - Performance Optimization: Improved Lighthouse scores (speed, SEO, accessibility)
+  - Accessibility Features: Added ARIA labels, keyboard navigation, and screen-reader support
 
 #### Admin Access Instructions
 To access the admin interface and analytics:
