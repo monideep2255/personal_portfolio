@@ -1,4 +1,4 @@
-import { projects, type Project, type InsertProject } from "@shared/schema";
+import { contactMessages, projects, type Project, type InsertProject, type ContactMessage, type InsertMessage } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
@@ -10,6 +10,8 @@ export interface IStorage {
   updateProject(id: number, project: Partial<InsertProject>): Promise<Project>;
   deleteProject(id: number): Promise<void>;
   getFeaturedProjects(): Promise<Project[]>;
+  // Contact Messages
+  createMessage(message: InsertMessage): Promise<ContactMessage>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -86,6 +88,20 @@ export class DatabaseStorage implements IStorage {
         .orderBy(projects.id);
     } catch (error) {
       console.error("Database error in getFeaturedProjects:", error);
+      throw error;
+    }
+  }
+
+  // Add contact message method
+  async createMessage(message: InsertMessage): Promise<ContactMessage> {
+    try {
+      const [newMessage] = await db
+        .insert(contactMessages)
+        .values(message)
+        .returning();
+      return newMessage;
+    } catch (error) {
+      console.error("Database error in createMessage:", error);
       throw error;
     }
   }
