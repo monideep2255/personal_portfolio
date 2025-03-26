@@ -20,6 +20,7 @@ const AdminLogin = lazy(() => import("@/pages/admin/Login"));
 const AdminProjects = lazy(() => import("@/pages/admin/Projects"));
 const AdminProjectEdit = lazy(() => import("@/pages/admin/ProjectEdit"));
 const NotFound = lazy(() => import("@/pages/not-found"));
+const AdminAnalytics = lazy(() => import("@/pages/admin/Analytics"));
 
 function Router() {
   // Initialize analytics tracking
@@ -41,6 +42,13 @@ function Router() {
                 {() => (
                   <ProtectedRoute>
                     <AdminProjects />
+                  </ProtectedRoute>
+                )}
+              </Route>
+              <Route path="/admin/analytics">
+                {() => (
+                  <ProtectedRoute>
+                    <AdminAnalytics />
                   </ProtectedRoute>
                 )}
               </Route>
