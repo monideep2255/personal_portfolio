@@ -72,10 +72,11 @@ A modern, responsive personal portfolio management system designed for seamless 
 
 #### Phase 5: Future Enhancements (🚧 Planned)
 
-- Blog System: Add a blog section with rich text editing and categories
-- Technical Documentation: Add a documentation section for technical write-ups
-- Newsletter Integration: Add subscription functionality for updates
-- Minor changes: Add background picture and improve text on the website
+- Blog Platform: Implement a full-featured blog with rich text editing, categories, and commenting system
+- Interactive Chatbot: Develop a personalized AI chatbot for enhanced user engagement and support
+- Technical Documentation Hub: Create a comprehensive documentation section for technical write-ups and tutorials
+- Newsletter System: Implement email subscription functionality with automated updates
+- UI Enhancement: Refine visual elements with custom background imagery and improved typography
 
 #### Key Technologies:
 - Next.js frontend framework
