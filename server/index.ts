@@ -22,9 +22,6 @@ app.use(session({
 // Configure authentication
 configureAuth(app);
 
-// Protect admin routes
-app.use('/api/projects', requireAuth);
-
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
