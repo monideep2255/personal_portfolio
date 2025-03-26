@@ -8,6 +8,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import LoadingFallback from "@/components/LoadingFallback";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 // Lazy load route components
 const Home = lazy(() => import("@/pages/Home"));
@@ -24,30 +25,32 @@ function Router() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 pt-16">
-        <Suspense fallback={<LoadingFallback />}>
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/projects" component={Projects} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/admin/login" component={AdminLogin} />
-            <Route path="/admin/projects">
-              {() => (
-                <ProtectedRoute>
-                  <AdminProjects />
-                </ProtectedRoute>
-              )}
-            </Route>
-            <Route path="/admin/projects/:id">
-              {(params) => (
-                <ProtectedRoute>
-                  <AdminProjectEdit params={params} />
-                </ProtectedRoute>
-              )}
-            </Route>
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<LoadingFallback />}>
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/projects" component={Projects} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/admin/login" component={AdminLogin} />
+              <Route path="/admin/projects">
+                {() => (
+                  <ProtectedRoute>
+                    <AdminProjects />
+                  </ProtectedRoute>
+                )}
+              </Route>
+              <Route path="/admin/projects/:id">
+                {(params) => (
+                  <ProtectedRoute>
+                    <AdminProjectEdit params={params} />
+                  </ProtectedRoute>
+                )}
+              </Route>
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>
