@@ -49,6 +49,14 @@ A modern, responsive personal portfolio management system designed for seamless 
 - Protected Routes: Implemented authentication for admin features
 
 #### Phase 4: Content Management & Analytics (✅ Completed) – March 26, 2025
+
+##### Admin Access Instructions
+To access the admin interface and analytics:
+1. Navigate to `/admin/projects` for project management
+2. Log in with admin credentials
+3. Manage projects, view analytics, and access the admin dashboard
+
+##### Features
 - Enhanced Project Management:
   - Added project categorization with predefined categories (Web Development, Mobile App, API, etc.)
   - Implemented tagging system for better project organization
