@@ -1,24 +1,26 @@
 # Personal Portfolio Website
 
+### Link To Project
+[Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
+
 ### Project Overview
-A modern, responsive personal portfolio website designed to showcase professional skills and projects with an emphasis on interactive user experience and smooth design transitions.
+A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
 
 Key Technologies:
 - Next.js frontend framework
 - Tailwind CSS for styling
-- React Icons library
-- Next-themes for dark mode implementation
-- PostgreSQL for contact form data storage
-- Responsive design with clear section demarcation
-- Modular page components for About, Home, and Projects sections
-- Updated Projects page with 'Coming Soon' placeholder
-- Refined Home page layout
+- React for component-based architecture
+- PostgreSQL database integration
+- Authentication and protected routes
+- Admin interface for project management
+- Flexible project image handling
+- Responsive design with intuitive user experience
 
 ### Phases & Feature Development
 
 #### Phase 1: Initial Setup (✅ Completed) – March 12, 2025
 
-##### Core Website Structure
+#### Core Website Structure
 - Responsive navigation bar with theme toggle
 - Home page with hero section
 - Projects showcase page
@@ -26,14 +28,14 @@ Key Technologies:
 - Contact form with database storage
 - Footer with social links
 
-##### Design & UI Improvements
+#### Design & UI Improvements
 - Professional and clean design
 - Responsive layout for all screen sizes
 - Dark/light theme support with persistent toggle
 - Smooth animations and transitions using Framer Motion
 - Consistent typography and spacing
 
-##### Technical Features
+#### Technical Features
 - Contact Form Database (PostgreSQL integration, API endpoint, validation with Zod)
 - Component Library (Reusable UI components using shadcn/ui)
 
@@ -56,7 +58,24 @@ Key Technologies:
 - Performance Optimization: Improve Lighthouse scores (speed, SEO, accessibility)
 - Accessibility Features: Ensure ARIA labels, keyboard navigation, and screen-reader support
 
-### Technical Stack
+#### Future Considerations
+- Image Upload System: Implement secure image upload and storage
+- Email Notifications: Set up email service for form submissions
+- Content Management System (CMS): Consider a headless CMS for better project/blog management
+- Website Analytics: Track visitor metrics and engagement with a dashboard
+- Minor changes: Add background picture and improve text on the website
+
+#### Key Technologies:
+- Next.js frontend framework
+- Tailwind CSS for styling
+- React for component-based architecture
+- PostgreSQL database integration
+- Authentication and protected routes
+- Admin interface for project management
+- Flexible project image handling
+- Responsive design with intuitive user experience
+
+#### Technical Stack
 - **Frontend**
   - Next.js
   - React
@@ -73,30 +92,13 @@ Key Technologies:
   - TypeScript
 
 ### Future Considerations
+- Image Upload System: Implement secure image upload and storage
 - Email Notifications: Set up email service for form submissions
 - Content Management System (CMS): Consider a headless CMS for better project/blog management
 - Website Analytics: Track visitor metrics and engagement with a dashboard
+- Minor changes: Add background picture and improve text on the website
 
-### Notes
-- The website is currently in development
-- Database is provisioned and running
-- All core functionality is working as expected
-
-## 📸 Screenshots
-
-### Home Page
-![Home Page]()
-
-### Projects Page
-![Projects Page]()
-
-### Resume Section
-![Resume Page 1]()
-![Resume Page 2]()
-
-Last Updated: March 20, 2025
-
-## 🚀 Getting Started
+## 🛠️ Local Development Setup
 
 ### Prerequisites
 - Node.js v20.18.1 or higher
