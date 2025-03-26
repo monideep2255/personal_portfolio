@@ -17,6 +17,9 @@ export const projects = pgTable("projects", {
   liveUrl: varchar("live_url", { length: 255 }),
   patternSeed: integer("pattern_seed"),
   featured: boolean("featured").default(false),
+  categories: text("categories").array().default([]),
+  tags: text("tags").array().default([]),
+  status: varchar("status", { length: 20 }).default("published"),
 });
 
 // Contact Message schemas
@@ -37,6 +40,9 @@ export const insertProjectSchema = createInsertSchema(projects).pick({
   liveUrl: true,
   patternSeed: true,
   featured: true,
+  categories: true,
+  tags: true,
+  status: true,
 }).extend({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
@@ -44,6 +50,9 @@ export const insertProjectSchema = createInsertSchema(projects).pick({
   liveUrl: z.string().url("Invalid URL").optional().nullable(),
   patternSeed: z.number().optional(),
   featured: z.boolean().default(false),
+  categories: z.array(z.string()).default([]),
+  tags: z.array(z.string()).default([]),
+  status: z.enum(["draft", "published"]).default("published"),
 });
 
 export type InsertProject = z.infer<typeof insertProjectSchema>;
