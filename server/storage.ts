@@ -1,6 +1,8 @@
 import { contactMessages, projects, type Project, type InsertProject, type ContactMessage, type InsertMessage } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, gte, lte, desc } from "drizzle-orm";
+import { type Analytics, type InsertAnalytics } from "./analytics"; // Assuming analytics schema is defined elsewhere
+
 
 export interface IStorage {
   // Projects
@@ -12,6 +14,13 @@ export interface IStorage {
   getFeaturedProjects(): Promise<Project[]>;
   // Contact Messages
   createMessage(message: InsertMessage): Promise<ContactMessage>;
+  // Analytics
+  createAnalyticsEvent(event: InsertAnalytics): Promise<Analytics>;
+  getAnalytics(filters?: { 
+    startDate?: Date;
+    endDate?: Date;
+    eventType?: string;
+  }): Promise<Analytics[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -102,6 +111,45 @@ export class DatabaseStorage implements IStorage {
       return newMessage;
     } catch (error) {
       console.error("Database error in createMessage:", error);
+      throw error;
+    }
+  }
+
+  // Analytics methods
+  async createAnalyticsEvent(event: InsertAnalytics): Promise<Analytics> {
+    try {
+      const [analyticsEvent] = await db
+        .insert(analytics)
+        .values(event)
+        .returning();
+      return analyticsEvent;
+    } catch (error) {
+      console.error("Database error in createAnalyticsEvent:", error);
+      throw error;
+    }
+  }
+
+  async getAnalytics(filters?: { 
+    startDate?: Date;
+    endDate?: Date;
+    eventType?: string;
+  }): Promise<Analytics[]> {
+    try {
+      let query = db.select().from(analytics);
+
+      if (filters?.startDate) {
+        query = query.where(gte(analytics.timestamp, filters.startDate));
+      }
+      if (filters?.endDate) {
+        query = query.where(lte(analytics.timestamp, filters.endDate));
+      }
+      if (filters?.eventType) {
+        query = query.where(eq(analytics.eventType, filters.eventType));
+      }
+
+      return await query.orderBy(desc(analytics.timestamp));
+    } catch (error) {
+      console.error("Database error in getAnalytics:", error);
       throw error;
     }
   }
