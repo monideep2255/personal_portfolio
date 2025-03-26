@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { insertProjectSchema, insertMessageSchema } from "@shared/schema";
+import { insertProjectSchema, insertMessageSchema, insertAnalyticsSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ZodError } from "zod";
 import { requireAuth } from "./auth";
@@ -107,6 +107,38 @@ export async function registerRoutes(app: Express) {
     } catch (error) {
       console.error("Failed to delete project:", error);
       res.status(500).json({ message: "Failed to delete project" });
+    }
+  });
+
+  // Analytics Endpoints
+  app.post("/api/analytics", async (req, res) => {
+    try {
+      const eventData = insertAnalyticsSchema.parse(req.body);
+      const event = await storage.createAnalyticsEvent(eventData);
+      res.status(201).json(event);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        res.status(400).json({ message: fromZodError(error).message });
+      } else {
+        console.error("Failed to create analytics event:", error);
+        res.status(500).json({ message: "Failed to create analytics event" });
+      }
+    }
+  });
+
+  app.get("/api/analytics", requireAuth, async (req, res) => {
+    try {
+      const filters = {
+        startDate: req.query.startDate ? new Date(req.query.startDate as string) : undefined,
+        endDate: req.query.endDate ? new Date(req.query.endDate as string) : undefined,
+        eventType: req.query.eventType as string | undefined,
+      };
+
+      const events = await storage.getAnalytics(filters);
+      res.json(events);
+    } catch (error) {
+      console.error("Failed to fetch analytics:", error);
+      res.status(500).json({ message: "Failed to fetch analytics" });
     }
   });
 
