@@ -5,6 +5,7 @@ import { Github, ExternalLink, Search } from "lucide-react";
 import type { Project } from "@shared/schema";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { ProjectPattern } from "@/components/ProjectPattern";
 
 export default function Projects() {
   const { data: projects, isLoading } = useQuery<Project[]>({
@@ -83,6 +84,9 @@ export default function Projects() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
+                <div className="mb-6 rounded-lg overflow-hidden bg-muted/30">
+                  <ProjectPattern seed={project.id} className="w-full" />
+                </div>
                 <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
                 <p className="text-muted-foreground mb-6">{project.description}</p>
                 <div className="flex gap-4">

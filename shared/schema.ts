@@ -1,4 +1,4 @@
-import { pgTable, text, serial, varchar, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, varchar, boolean, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -15,6 +15,7 @@ export const projects = pgTable("projects", {
   description: text("description").notNull(),
   githubUrl: varchar("github_url", { length: 255 }),
   liveUrl: varchar("live_url", { length: 255 }),
+  patternSeed: integer("pattern_seed"),
   featured: boolean("featured").default(false),
 });
 
@@ -34,12 +35,14 @@ export const insertProjectSchema = createInsertSchema(projects).pick({
   description: true,
   githubUrl: true,
   liveUrl: true,
+  patternSeed: true,
   featured: true,
 }).extend({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
   githubUrl: z.string().url("Invalid URL").optional().nullable(),
   liveUrl: z.string().url("Invalid URL").optional().nullable(),
+  patternSeed: z.number().optional(),
   featured: z.boolean().default(false),
 });
 
