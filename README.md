@@ -2,9 +2,6 @@
 
 # Personal Portfolio Website
 
-## Link To Project
-[Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
-
 ## Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
 
