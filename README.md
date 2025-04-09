@@ -1,3 +1,5 @@
+*Last Updated: April 09, 2025*
+
 # Personal Portfolio Website
 
 ## Link To Project
@@ -200,5 +202,3 @@ While Replit offers the most streamlined deployment experience, here are other f
    - Set publish directory: `dist`
    - Configure environment variables
    - Deploy
-
-Last Updated: March 26, 2025
