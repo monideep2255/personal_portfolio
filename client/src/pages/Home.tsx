@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { SiGithub, SiLinkedin } from "react-icons/si";
 
 export default function Home() {
   return (
@@ -58,32 +57,6 @@ export default function Home() {
             <Button variant="outline" asChild>
               <a href="/contact">Get in Touch</a>
             </Button>
-          </motion.div>
-
-          <motion.div
-            className="flex gap-4 mt-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-          >
-            <a
-              href="https://github.com/monideep2255"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-              aria-label="GitHub Profile"
-            >
-              <SiGithub className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/monideepc/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-              aria-label="LinkedIn Profile"
-            >
-              <SiLinkedin className="w-6 h-6" />
-            </a>
           </motion.div>
         </motion.div>
       </div>
