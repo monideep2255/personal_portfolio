@@ -2,8 +2,6 @@
 
 # Personal Portfolio Website
 
-[Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
-
 ## UI Showcase
 
 ### Main Pages
