@@ -1,7 +1,33 @@
+*Last Updated: April 09, 2025*
+
 # Personal Portfolio Website
 
-## Link To Project
 [Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
+
+## UI Showcase
+
+### Main Pages
+![Homepage](attached_assets/homepage.png)
+*Homepage with modern, responsive design*
+
+![About Me](attached_assets/about%20me.png)
+*About page showcasing professional experience and skills*
+
+![Projects](attached_assets/projects.png)
+*Projects showcase with search and filtering capabilities*
+
+![Contact](attached_assets/contact%20form.png)
+*Contact form with validation*
+
+![Dark Mode](attached_assets/dark%20mode.png)
+*Dark mode for better user experience*
+
+### Admin Interface
+![Project Management](attached_assets/content%20management%20system_projects.png)
+*Content Management System for Projects*
+
+![Analytics](attached_assets/analytics%20dashboard.png)
+*Analytics Dashboard with traffic insights*
 
 ## Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
@@ -200,5 +226,3 @@ While Replit offers the most streamlined deployment experience, here are other f
    - Set publish directory: `dist`
    - Configure environment variables
    - Deploy
-
-Last Updated: March 26, 2025
