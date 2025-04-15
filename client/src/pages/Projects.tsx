@@ -104,6 +104,13 @@ export default function Projects() {
                     seed={project.id}
                     title={project.title}
                     className="w-full max-w-[120px] mx-auto"
+                    icon={
+                      project.categories?.includes("Web") ? Globe :
+                      project.categories?.includes("Backend") ? Database :
+                      project.categories?.includes("CLI") ? Terminal :
+                      project.categories?.includes("Frontend") ? FileCode :
+                      Code2
+                    }
                   />
                 </div>
                 <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
