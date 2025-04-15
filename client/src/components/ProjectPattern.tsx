@@ -1,12 +1,15 @@
 import { useMemo } from "react";
 
+import { LucideIcon, Code2, FileCode, Folder, Terminal, Database, Globe } from "lucide-react";
+
 interface ProjectPatternProps {
   seed: number;
   title: string;
   className?: string;
+  icon?: LucideIcon;
 }
 
-export function ProjectPattern({ seed, title, className = "" }: ProjectPatternProps) {
+export function ProjectPattern({ seed, title, className = "", icon: Icon }: ProjectPatternProps) {
   const pattern = useMemo(() => {
     // Generate a deterministic pattern based on the seed
     const random = (seed: number) => {
@@ -41,7 +44,7 @@ export function ProjectPattern({ seed, title, className = "" }: ProjectPatternPr
       role="img"
       aria-label={`${title} project icon`}
     >
-      {firstLetter}
+      {Icon ? <Icon size={32} /> : firstLetter}
     </div>
   );
 }

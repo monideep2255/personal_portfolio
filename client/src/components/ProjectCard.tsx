@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
+import { Globe, Database, Terminal, FileCode, Code2 } from "lucide-react"; // Added imports for icons
+
 
 interface ProjectCardProps {
   title: string;
@@ -10,9 +12,10 @@ interface ProjectCardProps {
   githubUrl: string;
   liveUrl?: string;
   index: number;
+  category: string; // Added category prop
 }
 
-export function ProjectCard({ title, description, technologies, githubUrl, liveUrl, index }: ProjectCardProps) {
+export function ProjectCard({ title, description, technologies, githubUrl, liveUrl, index, category }: ProjectCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
