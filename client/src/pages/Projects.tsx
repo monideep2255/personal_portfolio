@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Search } from "lucide-react";
+import { Github, ExternalLink, Search, Globe, Database, Terminal, FileCode, Code2 } from "lucide-react";
 import type { Project } from "@shared/schema";
 import { Input } from "@/components/ui/input";
 import { useState, useMemo, useCallback } from "react";
