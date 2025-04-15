@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Search, Globe, Database, Terminal, FileCode, Code2, Code } from "lucide-react";
+import { Github, ExternalLink, Search, Globe, Database, Terminal, FileCode, Code } from "lucide-react";
 import type { Project } from "@shared/schema";
 import { Input } from "@/components/ui/input";
 import { useState, useMemo, useCallback } from "react";
@@ -109,7 +109,8 @@ export default function Projects() {
                       project.categories?.includes("Backend") ? Database :
                       project.categories?.includes("CLI") ? Terminal :
                       project.categories?.includes("Frontend") ? FileCode :
-                      Code
+                      project.categories?.includes("Mobile") ? Code :
+                      Globe
                     }
                   />
                 </div>
