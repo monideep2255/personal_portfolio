@@ -5,11 +5,10 @@ import { KanbanSquare, Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "./ui/button";
 import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTrigger,
-} from "./ui/drawer";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 export function Navbar() {
   const links = [
@@ -46,18 +45,16 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           {isMobile ? (
-            <Drawer>
-              <DrawerTrigger asChild>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <Menu className="h-5 w-5" />
                 </Button>
-              </DrawerTrigger>
-              <DrawerContent>
-                <DrawerHeader className="flex flex-col gap-4">
-                  <NavLinks />
-                </DrawerHeader>
-              </DrawerContent>
-            </Drawer>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <NavLinks />
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <div className="flex items-center gap-6">
               <NavLinks />
