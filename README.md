@@ -4,7 +4,7 @@
 
 ## Links to Personal Portfolio Website and PRD
 - [Personal Website](https://personal-portfolio-monideepchakrab.replit.app/)
-- [PRD](docs/prd.md)
+- [PRD](docs/PRD.md)
 
 ## UI Showcase
 
