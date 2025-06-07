@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 export default function Home() {
   return (
@@ -58,6 +58,59 @@ export default function Home() {
               <a href="/contact">Get in Touch</a>
             </Button>
           </motion.div>
+        </motion.div>
+
+        {/* Chat with Me Section */}
+        <motion.div
+          className="max-w-4xl mx-auto mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+        >
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <MessageCircle className="h-6 w-6 text-primary" />
+              <h2 className="text-3xl font-bold">Chat with Me</h2>
+            </div>
+            <p className="text-lg text-muted-foreground">
+              Have questions about my career journey, projects, or AI/ML expertise? 
+              Start a conversation with my interactive chatbot!
+            </p>
+          </div>
+          
+          <div className="chat-container bg-card border rounded-lg shadow-lg p-6">
+            <div className="text-center">
+              <div className="mb-6">
+                <MessageCircle className="h-16 w-16 text-primary mx-auto mb-4 opacity-80" />
+                <h3 className="text-xl font-semibold mb-2">Interactive Career Chat</h3>
+                <p className="text-muted-foreground mb-6">
+                  Click below to open my AI-powered career conversation bot in a new tab. 
+                  Ask me anything about my experience, projects, or career journey!
+                </p>
+              </div>
+              
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                <a 
+                  href="https://huggingface.co/spaces/monideep2255/career_conversation" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  Start Conversation
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+              
+              <p className="text-sm text-muted-foreground mt-4">
+                Opens in a new tab • Powered by HuggingFace Spaces
+              </p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

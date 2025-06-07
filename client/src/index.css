@@ -11,3 +11,21 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+@layer components {
+  .chat-container {
+    @apply w-full max-w-none mx-auto;
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Dark mode styling for chat container */
+  .dark .chat-container {
+    @apply bg-card border-border;
+  }
+
+  /* Hover effects for chat button */
+  .chat-container button:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+  }
+}
