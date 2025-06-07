@@ -78,16 +78,38 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="chat-container bg-card border rounded-lg shadow-lg overflow-hidden">
-            <iframe 
-              src="https://huggingface.co/spaces/monideep2255/career_conversation" 
-              width="100%" 
-              height="600" 
-              style={{ border: 'none' }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title="Career Conversation Chatbot"
-            />
+          <div className="chat-container bg-card border rounded-lg shadow-lg p-6">
+            <div className="text-center">
+              <div className="mb-6">
+                <MessageCircle className="h-16 w-16 text-primary mx-auto mb-4 opacity-80" />
+                <h3 className="text-xl font-semibold mb-2">Interactive Career Chat</h3>
+                <p className="text-muted-foreground mb-6">
+                  Click below to open my AI-powered career conversation bot in a new tab. 
+                  Ask me anything about my experience, projects, or career journey!
+                </p>
+              </div>
+              
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                <a 
+                  href="https://huggingface.co/spaces/monideep2255/career_conversation" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  Start Conversation
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+              
+              <p className="text-sm text-muted-foreground mt-4">
+                Opens in a new tab • Powered by HuggingFace Spaces
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>

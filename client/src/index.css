@@ -18,34 +18,14 @@
     transition: all 0.3s ease-in-out;
   }
 
-  .chat-container iframe {
-    @apply w-full rounded-lg;
-    border: none;
-    min-height: 600px;
-  }
-
-  /* Responsive design for chatbot */
-  @media (max-width: 768px) {
-    .chat-container iframe {
-      min-height: 500px;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .chat-container iframe {
-      min-height: 450px;
-    }
-  }
-
   /* Dark mode styling for chat container */
   .dark .chat-container {
     @apply bg-card border-border;
   }
 
-  /* Loading state for iframe */
-  .chat-container::before {
-    content: '';
-    @apply absolute inset-0 bg-muted animate-pulse rounded-lg;
-    z-index: -1;
+  /* Hover effects for chat button */
+  .chat-container button:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
   }
 }
