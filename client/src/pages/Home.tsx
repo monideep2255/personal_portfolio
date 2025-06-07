@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 export default function Home() {
   return (
@@ -58,6 +58,37 @@ export default function Home() {
               <a href="/contact">Get in Touch</a>
             </Button>
           </motion.div>
+        </motion.div>
+
+        {/* Chat with Me Section */}
+        <motion.div
+          className="max-w-4xl mx-auto mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+        >
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <MessageCircle className="h-6 w-6 text-primary" />
+              <h2 className="text-3xl font-bold">Chat with Me</h2>
+            </div>
+            <p className="text-lg text-muted-foreground">
+              Have questions about my career journey, projects, or AI/ML expertise? 
+              Start a conversation with my interactive chatbot!
+            </p>
+          </div>
+          
+          <div className="chat-container bg-card border rounded-lg shadow-lg overflow-hidden">
+            <iframe 
+              src="https://huggingface.co/spaces/monideep2255/career_conversation" 
+              width="100%" 
+              height="600" 
+              style={{ border: 'none' }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Career Conversation Chatbot"
+            />
+          </div>
         </motion.div>
       </div>
     </section>
