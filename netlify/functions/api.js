@@ -1,17 +1,17 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
 import { projects, contactMessages, analytics } from '../../shared/schema.js';
 import { eq, desc } from 'drizzle-orm';
 
-// Initialize database connection with error handling
-let pool, db;
+// Initialize database connection with HTTP adapter for serverless
+let db;
 try {
   if (!process.env.DATABASE_URL) {
     throw new Error('DATABASE_URL environment variable is missing');
   }
   
-  pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  db = drizzle(pool, { schema: { projects, contactMessages, analytics } });
+  const sql = neon(process.env.DATABASE_URL);
+  db = drizzle(sql, { schema: { projects, contactMessages, analytics } });
 } catch (dbError) {
   console.error('Database initialization error:', dbError);
 }

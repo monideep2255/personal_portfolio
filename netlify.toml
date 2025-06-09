@@ -19,4 +19,4 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
-  external_node_modules = ["@neondatabase/serverless", "ws", "nodemailer"]
+  external_node_modules = ["@neondatabase/serverless"]
