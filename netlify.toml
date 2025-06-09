@@ -1,13 +1,13 @@
 [build]
   publish = "dist"
-  command = "./build-netlify.sh"
+  command = "npm run build"
 
 [build.environment]
   NODE_VERSION = "20"
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/api"
   status = 200
 
 [[redirects]]
