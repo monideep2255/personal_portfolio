@@ -195,36 +195,63 @@ The application will start in development mode with hot-reload enabled.
 
 ## 🚀 Deployment
 
-Note: For optimal development experience and seamless deployment, we recommend using Replit's built-in deployment features.
+#### Recommended: Deploy on Netlify (Production Ready)
 
-#### Recommended: Deploy on Replit (Free & Easy)
-1. Click the "Deploy" button in the Replit workspace
-2. Choose "Static Deploy" for the frontend (it's free and fast)
-3. Configure your deployment settings if needed
-4. Click "Deploy" to publish your site
-5. Your site will be live at `your-repl-name.replit.app`
+The codebase is optimized for Netlify deployment with serverless functions and automatic scaling.
 
-#### Alternative Free Deployment Options
+**Prerequisites:**
+1. **Neon Database** (Free PostgreSQL hosting)
+   - Create account at [neon.tech](https://neon.tech)
+   - Create new project and copy connection string
+   - Free tier: 3GB storage, always-available compute
 
-While Replit offers the most streamlined deployment experience, here are other free options:
+2. **GitHub Repository**
+   - Ensure your code is pushed to GitHub
 
-1. **Render.com**
-   - Create a new Web Service
+**Deployment Steps:**
+
+1. **Deploy to Netlify**
+   - Go to [netlify.com](https://netlify.com) and create account
+   - Click "Add new site" → "Import an existing project"
    - Connect your GitHub repository
-   - Set build command: `npm run build`
-   - Set start command: `npm run start`
-   - Add your environment variables
-   - Deploy
+   - Netlify auto-detects build settings from `netlify.toml`
 
-2. **Railway.app**
-   - Connect your GitHub repository
+2. **Environment Variables**
+   Add these in Netlify Dashboard → Site settings → Environment variables:
+   ```
+   DATABASE_URL=your_neon_database_connection_string
+   ADMIN_USERNAME=your_admin_username
+   ADMIN_PASSWORD=your_admin_password
+   EMAIL_USER=your_gmail_address
+   EMAIL_PASSWORD=your_gmail_app_password
+   ```
+
+3. **Features Included**
+   - Serverless API functions
+   - Automatic HTTPS and CDN
+   - Form handling and analytics
+   - Admin dashboard with authentication
+   - Contact form with email notifications
+
+**Live Site:** Your portfolio will be accessible at `your-site-name.netlify.app`
+
+**Free Tier Limits:**
+- Netlify: 100GB bandwidth, 125K function requests/month
+- Neon: 3GB storage, unlimited requests
+
+#### Alternative Deployment Options
+
+1. **Replit Deploy** (Development/Testing)
+   - Click "Deploy" button in Replit workspace
+   - Choose deployment type and configure
+   - Live at `your-repl-name.replit.app`
+
+2. **Render.com**
+   - Connect GitHub repository
+   - Set build: `npm run build`, start: `npm run start`
    - Configure environment variables
-   - Railway will auto-detect build settings
-   - Deploy
 
-3. **Netlify**
-   - Connect your GitHub repository
-   - Set build command: `npm run build`
-   - Set publish directory: `dist`
+3. **Railway.app**
+   - Connect GitHub repository
+   - Auto-detects build settings
    - Configure environment variables
-   - Deploy
