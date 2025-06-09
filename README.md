@@ -2,7 +2,7 @@
 
 # Personal Portfolio Website
 
-**Live Site:** [https://monideep-chakraborti.netlify.app/](https://monideep-chakraborti.netlify.app/)
+[Visit Personal Portfolio](https://monideep-chakraborti.netlify.app/)
 
 ## Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
