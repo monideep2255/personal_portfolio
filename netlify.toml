@@ -1,9 +1,10 @@
 [build]
-  publish = "dist/public"
-  command = "vite build"
+  publish = "dist"
+  command = "chmod +x build-netlify.sh && ./build-netlify.sh"
 
 [build.environment]
   NODE_VERSION = "20"
+  NPM_FLAGS = "--production=false"
 
 [[redirects]]
   from = "/api/*"
