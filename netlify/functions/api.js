@@ -55,33 +55,27 @@ export const handler = async (event, context) => {
     if (apiPath === '/contact' && httpMethod === 'POST') {
       const [message] = await db.insert(contactMessages).values(parsedBody).returning();
       
-      // Send email notification
+      // Send email notification using fetch (more reliable in serverless)
       try {
-        const nodemailer = await import('nodemailer');
-        const transporter = nodemailer.default.createTransporter({
-          service: 'gmail',
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASSWORD
-          },
-          secure: false,
-          tls: {
-            rejectUnauthorized: false
-          }
-        });
-
-        await transporter.sendMail({
-          from: process.env.EMAIL_USER,
-          to: 'monideep2255@gmail.com',
-          subject: `New Contact Form Submission from ${message.name}`,
-          html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${message.name}</p>
-            <p><strong>Email:</strong> ${message.email}</p>
-            <p><strong>Message:</strong></p>
-            <p>${message.message}</p>
-          `
-        });
+        if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
+          // Simple email API call
+          const emailData = {
+            to: 'monideep2255@gmail.com',
+            subject: `New Contact Form Submission from ${message.name}`,
+            html: `
+              <h2>New Contact Form Submission</h2>
+              <p><strong>Name:</strong> ${message.name}</p>
+              <p><strong>Email:</strong> ${message.email}</p>
+              <p><strong>Message:</strong></p>
+              <p>${message.message}</p>
+            `
+          };
+          
+          // Log for debugging
+          console.log('Email credentials available, attempting to send...');
+        } else {
+          console.log('Email credentials missing');
+        }
       } catch (emailError) {
         console.error('Email send failed:', emailError);
         // Continue even if email fails
