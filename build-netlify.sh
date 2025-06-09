@@ -2,10 +2,6 @@
 
 # Build the frontend
 echo "Building frontend..."
-npm run build
-
-# Build the serverless function
-echo "Building serverless functions..."
-npx esbuild server/netlify-handler.js --platform=node --packages=external --bundle --format=esm --outdir=dist --external:@neondatabase/serverless --external:ws
+vite build
 
 echo "Netlify build complete!"
