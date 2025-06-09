@@ -1,6 +1,6 @@
 [build]
-  publish = "dist"
-  command = "npm ci && vite build"
+  publish = "dist/public"
+  command = "chmod +x build-netlify.sh && ./build-netlify.sh"
 
 [build.environment]
   NODE_VERSION = "20"
@@ -8,7 +8,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api"
+  to = "/.netlify/functions/api/:splat"
   status = 200
 
 [[redirects]]
