@@ -1,7 +1,10 @@
-import { Pool } from '@neondatabase/serverless';
+import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import { projects, contactMessages, analytics } from '../../shared/schema.js';
 import { eq, desc } from 'drizzle-orm';
+import ws from 'ws';
+
+neonConfig.webSocketConstructor = ws;
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const db = drizzle(pool, { schema: { projects, contactMessages, analytics } });
@@ -60,6 +63,10 @@ export const handler = async (event, context) => {
           auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASSWORD
+          },
+          secure: false,
+          tls: {
+            rejectUnauthorized: false
           }
         });
 
