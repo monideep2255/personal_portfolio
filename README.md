@@ -2,30 +2,6 @@
 
 # Personal Portfolio Website
 
-## UI Showcase
-
-### Main Pages
-![Homepage](attached_assets/homepage.png)
-*Homepage with modern, responsive design*
-
-![About Me](attached_assets/about%20me.png)
-*About page showcasing professional experience and skills*
-
-![Projects](attached_assets/projects.png)
-*Projects showcase with search and filtering capabilities*
-
-![Contact](attached_assets/contact%20form.png)
-*Contact form with validation*
-
-![Dark Mode](attached_assets/dark%20mode.png)
-*Dark mode for better user experience*
-
-### Admin Interface
-![Project Management](attached_assets/content%20management%20system_projects.png)
-*Content Management System for Projects*
-
-![Analytics](attached_assets/analytics%20dashboard.png)
-*Analytics Dashboard with traffic insights*
 
 ## Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
@@ -230,18 +206,6 @@ The codebase is optimized for Netlify deployment with serverless functions and a
    - Contact form with email notifications
 
 **Live Site:** Your portfolio will be accessible at `your-site-name.netlify.app`
-
-**Build Settings Verification:**
-If you encounter "Page not found" errors, verify these settings in Netlify Dashboard:
-- Build command: `npm run build`
-- Publish directory: `dist`
-- Functions directory: `netlify/functions`
-
-**Troubleshooting 404 Errors:**
-1. Check build logs in Netlify Dashboard → Deploys
-2. Verify all environment variables are set correctly
-3. Test API endpoints: `https://your-site.netlify.app/.netlify/functions/api/projects`
-4. Ensure `netlify.toml` configuration is properly deployed
 
 **Free Tier Limits:**
 - Netlify: 100GB bandwidth, 125K function requests/month
