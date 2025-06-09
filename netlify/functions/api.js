@@ -3,18 +3,9 @@ import { drizzle } from 'drizzle-orm/neon-http';
 import { projects, contactMessages, analytics } from '../../shared/schema.js';
 import { eq, desc } from 'drizzle-orm';
 
-// Initialize database connection with HTTP adapter for serverless
-let db;
-try {
-  if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL environment variable is missing');
-  }
-  
-  const sql = neon(process.env.DATABASE_URL);
-  db = drizzle(sql, { schema: { projects, contactMessages, analytics } });
-} catch (dbError) {
-  console.error('Database initialization error:', dbError);
-}
+// Initialize database with HTTP adapter (serverless compatible)
+const sql = neon(process.env.DATABASE_URL);
+const db = drizzle(sql, { schema: { projects, contactMessages, analytics } });
 
 export const handler = async (event, context) => {
   const { httpMethod, path, body, headers } = event;
@@ -60,14 +51,7 @@ export const handler = async (event, context) => {
         })
       };
     }
-    // Check if database is initialized
-    if (!db) {
-      return {
-        statusCode: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: 'Database connection failed' }),
-      };
-    }
+
 
     const parsedBody = body ? JSON.parse(body) : {};
     
