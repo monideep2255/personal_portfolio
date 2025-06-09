@@ -1,35 +1,8 @@
-*Last Updated: April 17, 2025*
+*Last Updated: June 09, 2025*
 
 # Personal Portfolio Website
 
-## Links to Personal Portfolio Website and PRD
-- [Personal Website](https://personal-portfolio-monideepchakrab.replit.app/)
-- [PRD](docs/PRD.md)
-
-## UI Showcase
-
-### Main Pages
-![Homepage](attached_assets/homepage.png)
-*Homepage with modern, responsive design*
-
-![About Me](attached_assets/about%20me.png)
-*About page showcasing professional experience and skills*
-
-![Projects](attached_assets/projects.png)
-*Projects showcase with search and filtering capabilities*
-
-![Contact](attached_assets/contact%20form.png)
-*Contact form with validation*
-
-![Dark Mode](attached_assets/dark%20mode.png)
-*Dark mode for better user experience*
-
-### Admin Interface
-![Project Management](attached_assets/content%20management%20system_projects.png)
-*Content Management System for Projects*
-
-![Analytics](attached_assets/analytics%20dashboard.png)
-*Analytics Dashboard with traffic insights*
+[Visit Personal Portfolio](https://monideep-chakraborti.netlify.app/)
 
 ## Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.

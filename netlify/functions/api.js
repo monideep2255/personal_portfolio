@@ -27,8 +27,11 @@ export const handler = async (event, context) => {
   try {
     const parsedBody = body ? JSON.parse(body) : {};
     
+    // Extract the API path from the full path
+    const apiPath = path.replace('/.netlify/functions/api', '') || '/';
+    
     // Route handling
-    if (path === '/.netlify/functions/api/projects' && httpMethod === 'GET') {
+    if (apiPath === '/projects' && httpMethod === 'GET') {
       const allProjects = await db.select().from(projects).where(eq(projects.status, 'published')).orderBy(desc(projects.id));
       return {
         statusCode: 200,
@@ -37,7 +40,7 @@ export const handler = async (event, context) => {
       };
     }
 
-    if (path === '/.netlify/functions/api/projects/featured' && httpMethod === 'GET') {
+    if (apiPath === '/projects/featured' && httpMethod === 'GET') {
       const featuredProjects = await db.select().from(projects).where(eq(projects.featured, true)).orderBy(desc(projects.id));
       return {
         statusCode: 200,
@@ -46,7 +49,7 @@ export const handler = async (event, context) => {
       };
     }
 
-    if (path === '/.netlify/functions/api/contact' && httpMethod === 'POST') {
+    if (apiPath === '/contact' && httpMethod === 'POST') {
       const [message] = await db.insert(contactMessages).values(parsedBody).returning();
       return {
         statusCode: 201,
@@ -55,7 +58,7 @@ export const handler = async (event, context) => {
       };
     }
 
-    if (path === '/.netlify/functions/api/analytics' && httpMethod === 'POST') {
+    if (apiPath === '/analytics' && httpMethod === 'POST') {
       const [event] = await db.insert(analytics).values(parsedBody).returning();
       return {
         statusCode: 201,
@@ -65,7 +68,7 @@ export const handler = async (event, context) => {
     }
 
     // Admin routes (require authentication in production)
-    if (path.startsWith('/.netlify/functions/api/admin/')) {
+    if (apiPath.startsWith('/admin/')) {
       // Basic auth check
       const authHeader = headers.authorization;
       const credentials = process.env.ADMIN_USERNAME + ':' + process.env.ADMIN_PASSWORD;
@@ -79,7 +82,7 @@ export const handler = async (event, context) => {
         };
       }
 
-      if (path === '/.netlify/functions/api/admin/projects' && httpMethod === 'GET') {
+      if (apiPath === '/admin/projects' && httpMethod === 'GET') {
         const allProjects = await db.select().from(projects).orderBy(desc(projects.id));
         return {
           statusCode: 200,
@@ -88,7 +91,7 @@ export const handler = async (event, context) => {
         };
       }
 
-      if (path === '/.netlify/functions/api/admin/analytics' && httpMethod === 'GET') {
+      if (apiPath === '/admin/analytics' && httpMethod === 'GET') {
         const allAnalytics = await db.select().from(analytics).orderBy(desc(analytics.timestamp));
         return {
           statusCode: 200,
