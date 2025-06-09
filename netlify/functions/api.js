@@ -2,9 +2,6 @@ import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import { projects, contactMessages, analytics } from '../../shared/schema.js';
 import { eq, desc } from 'drizzle-orm';
-import ws from 'ws';
-
-neonConfig.webSocketConstructor = ws;
 
 // Initialize database connection with error handling
 let pool, db;
@@ -115,48 +112,66 @@ export const handler = async (event, context) => {
     }
 
     if (apiPath === '/contact' && httpMethod === 'POST') {
-      const [message] = await db.insert(contactMessages).values(parsedBody).returning();
-      
-      // Send email notification using fetch (more reliable in serverless)
       try {
-        if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
-          // Simple email API call
-          const emailData = {
-            to: 'monideep2255@gmail.com',
-            subject: `New Contact Form Submission from ${message.name}`,
-            html: `
-              <h2>New Contact Form Submission</h2>
-              <p><strong>Name:</strong> ${message.name}</p>
-              <p><strong>Email:</strong> ${message.email}</p>
-              <p><strong>Message:</strong></p>
-              <p>${message.message}</p>
-            `
-          };
-          
-          // Log for debugging
-          console.log('Email credentials available, attempting to send...');
-        } else {
-          console.log('Email credentials missing');
+        const [message] = await db.insert(contactMessages).values(parsedBody).returning();
+        
+        // Send email notification using fetch (more reliable in serverless)
+        try {
+          if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
+            // Simple email API call
+            const emailData = {
+              to: 'monideep2255@gmail.com',
+              subject: `New Contact Form Submission from ${message.name}`,
+              html: `
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> ${message.name}</p>
+                <p><strong>Email:</strong> ${message.email}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message.message}</p>
+              `
+            };
+            
+            // Log for debugging
+            console.log('Email credentials available, attempting to send...');
+          } else {
+            console.log('Email credentials missing');
+          }
+        } catch (emailError) {
+          console.error('Email send failed:', emailError);
+          // Continue even if email fails
         }
-      } catch (emailError) {
-        console.error('Email send failed:', emailError);
-        // Continue even if email fails
+        
+        return {
+          statusCode: 201,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify(message),
+        };
+      } catch (dbError) {
+        console.error('Contact form database error:', dbError);
+        return {
+          statusCode: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ error: 'Failed to save contact message', details: dbError.message }),
+        };
       }
-      
-      return {
-        statusCode: 201,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify(message),
-      };
     }
 
     if (apiPath === '/analytics' && httpMethod === 'POST') {
-      const [event] = await db.insert(analytics).values(parsedBody).returning();
-      return {
-        statusCode: 201,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify(event),
-      };
+      try {
+        const [event] = await db.insert(analytics).values(parsedBody).returning();
+        return {
+          statusCode: 201,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify(event),
+        };
+      } catch (dbError) {
+        console.error('Analytics insert error:', dbError);
+        return {
+          statusCode: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ error: 'Failed to save analytics event', details: dbError.message }),
+        };
+      }
     }
 
     // Admin routes (require authentication in production)
@@ -175,21 +190,39 @@ export const handler = async (event, context) => {
       }
 
       if (apiPath === '/admin/projects' && httpMethod === 'GET') {
-        const allProjects = await db.select().from(projects).orderBy(desc(projects.id));
-        return {
-          statusCode: 200,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          body: JSON.stringify(allProjects),
-        };
+        try {
+          const allProjects = await db.select().from(projects).orderBy(desc(projects.id));
+          return {
+            statusCode: 200,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            body: JSON.stringify(allProjects),
+          };
+        } catch (dbError) {
+          console.error('Admin projects query error:', dbError);
+          return {
+            statusCode: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ error: 'Failed to fetch admin projects', details: dbError.message }),
+          };
+        }
       }
 
       if (apiPath === '/admin/analytics' && httpMethod === 'GET') {
-        const allAnalytics = await db.select().from(analytics).orderBy(desc(analytics.timestamp));
-        return {
-          statusCode: 200,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          body: JSON.stringify(allAnalytics),
-        };
+        try {
+          const allAnalytics = await db.select().from(analytics).orderBy(desc(analytics.timestamp));
+          return {
+            statusCode: 200,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            body: JSON.stringify(allAnalytics),
+          };
+        } catch (dbError) {
+          console.error('Admin analytics query error:', dbError);
+          return {
+            statusCode: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ error: 'Failed to fetch admin analytics', details: dbError.message }),
+          };
+        }
       }
     }
 
