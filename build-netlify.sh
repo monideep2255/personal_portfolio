@@ -14,6 +14,16 @@ npm ci
 
 # Build the frontend
 echo "Building frontend..."
-vite build
+cd client && npm run build && cd ..
+
+# Create proper directory structure
+mkdir -p dist/public
+cp -r client/dist/* dist/public/
+
+# Verify build output
+echo "Build verification:"
+ls -la dist/public/
+echo "Functions directory:"
+ls -la netlify/functions/
 
 echo "Netlify build complete!"
