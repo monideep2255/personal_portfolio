@@ -6,19 +6,18 @@ import ws from 'ws';
 
 neonConfig.webSocketConstructor = ws;
 
-// Debug environment variables
-console.log('Environment check:', {
-  DATABASE_URL: process.env.DATABASE_URL ? 'SET' : 'MISSING',
-  EMAIL_USER: process.env.EMAIL_USER ? 'SET' : 'MISSING',
-  EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? 'SET' : 'MISSING'
-});
-
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is missing');
+// Initialize database connection with error handling
+let pool, db;
+try {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL environment variable is missing');
+  }
+  
+  pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  db = drizzle(pool, { schema: { projects, contactMessages, analytics } });
+} catch (dbError) {
+  console.error('Database initialization error:', dbError);
 }
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const db = drizzle(pool, { schema: { projects, contactMessages, analytics } });
 
 export const handler = async (event, context) => {
   const { httpMethod, path, body, headers } = event;
@@ -64,6 +63,15 @@ export const handler = async (event, context) => {
         })
       };
     }
+    // Check if database is initialized
+    if (!db) {
+      return {
+        statusCode: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Database connection failed' }),
+      };
+    }
+
     const parsedBody = body ? JSON.parse(body) : {};
     
     // Extract the API path from the full path
@@ -71,21 +79,39 @@ export const handler = async (event, context) => {
     
     // Route handling
     if (apiPath === '/projects' && httpMethod === 'GET') {
-      const allProjects = await db.select().from(projects).where(eq(projects.status, 'published')).orderBy(desc(projects.id));
-      return {
-        statusCode: 200,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify(allProjects),
-      };
+      try {
+        const allProjects = await db.select().from(projects).where(eq(projects.status, 'published')).orderBy(desc(projects.id));
+        return {
+          statusCode: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify(allProjects),
+        };
+      } catch (dbError) {
+        console.error('Database query error:', dbError);
+        return {
+          statusCode: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ error: 'Database query failed', details: dbError.message }),
+        };
+      }
     }
 
     if (apiPath === '/projects/featured' && httpMethod === 'GET') {
-      const featuredProjects = await db.select().from(projects).where(eq(projects.featured, true)).orderBy(desc(projects.id));
-      return {
-        statusCode: 200,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify(featuredProjects),
-      };
+      try {
+        const featuredProjects = await db.select().from(projects).where(eq(projects.featured, true)).orderBy(desc(projects.id));
+        return {
+          statusCode: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify(featuredProjects),
+        };
+      } catch (dbError) {
+        console.error('Featured projects query error:', dbError);
+        return {
+          statusCode: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ error: 'Featured projects query failed', details: dbError.message }),
+        };
+      }
     }
 
     if (apiPath === '/contact' && httpMethod === 'POST') {
