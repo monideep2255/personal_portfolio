@@ -81,6 +81,31 @@ export const handler = async (event, context) => {
       };
     }
 
+    if (apiPath === '/admin/login' && httpMethod === 'POST') {
+      const { username, password } = parsedBody;
+      
+      if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+        return {
+          statusCode: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            success: true, 
+            message: 'Login successful',
+            user: { username: username }
+          }),
+        };
+      } else {
+        return {
+          statusCode: 401,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            success: false, 
+            message: 'Invalid credentials' 
+          }),
+        };
+      }
+    }
+
     return {
       statusCode: 404,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
