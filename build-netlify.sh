@@ -1,29 +1,29 @@
 #!/bin/bash
 
-# Debug environment variables for Netlify
-echo "=== Environment Variables Check ==="
-echo "DATABASE_URL: ${DATABASE_URL:+SET}"
-echo "EMAIL_USER: ${EMAIL_USER:+SET}"
-echo "EMAIL_PASSWORD: ${EMAIL_PASSWORD:+SET}"
-echo "ADMIN_USERNAME: ${ADMIN_USERNAME:+SET}"
-echo "ADMIN_PASSWORD: ${ADMIN_PASSWORD:+SET}"
-echo "=================================="
+echo "Starting Netlify build process..."
 
 # Install dependencies
 npm ci
 
 # Build the frontend
-echo "Building frontend..."
-cd client && npm run build && cd ..
+echo "Building frontend with Vite..."
+vite build
 
-# Create proper directory structure
-mkdir -p dist/public
-cp -r client/dist/* dist/public/
+# Ensure dist directory structure is correct for Netlify
+echo "Preparing build output..."
+if [ -d "dist/public" ]; then
+  echo "Moving files from dist/public to dist..."
+  cp -r dist/public/* dist/
+  rm -rf dist/public
+fi
 
-# Verify build output
-echo "Build verification:"
-ls -la dist/public/
-echo "Functions directory:"
-ls -la netlify/functions/
+# Ensure index.html is in the root of dist
+if [ ! -f "dist/index.html" ]; then
+  echo "ERROR: index.html not found in dist directory"
+  ls -la dist/
+  exit 1
+fi
 
-echo "Netlify build complete!"
+echo "Build completed successfully!"
+echo "Files in dist directory:"
+ls -la dist/
