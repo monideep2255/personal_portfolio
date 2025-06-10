@@ -1,6 +1,6 @@
 [build]
   publish = "dist"
-  command = "npm ci && vite build"
+  command = "./build-netlify.sh"
 
 [build.environment]
   NODE_VERSION = "20"
