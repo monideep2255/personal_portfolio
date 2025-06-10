@@ -10,27 +10,20 @@ echo "ADMIN_PASSWORD: ${ADMIN_PASSWORD:+SET}"
 echo "=================================="
 
 # Install dependencies
-echo "Installing dependencies..."
 npm ci
 
 # Build the frontend
 echo "Building frontend..."
-npm run build
+cd client && npm run build && cd ..
 
 # Create proper directory structure
-echo "Creating directory structure..."
 mkdir -p dist/public
-cp -r dist/* dist/public/
-
-# Copy functions
-echo "Copying functions..."
-mkdir -p dist/functions
-cp -r netlify/functions/* dist/functions/
+cp -r client/dist/* dist/public/
 
 # Verify build output
 echo "Build verification:"
 ls -la dist/public/
 echo "Functions directory:"
-ls -la dist/functions/
+ls -la netlify/functions/
 
 echo "Netlify build complete!"
