@@ -1,10 +1,10 @@
-import { useMemo } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMemo, useEffect } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertProjectSchema } from "@shared/schema";
-import type { InsertProject } from "@shared/schema";
+import type { InsertProject, Project } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,22 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
   const [, setLocation] = useLocation();
   const isNew = params.id === "new";
 
+  // Fetch existing project data when editing
+  const { data: project, isLoading, error } = useQuery<Project>({
+    queryKey: [`/api/projects/${params.id}`],
+    enabled: !isNew,
+  });
+
+  // Debug logging
+  console.log("ProjectEdit Debug:", {
+    isNew,
+    projectId: params.id,
+    isLoading,
+    project,
+    error,
+    queryKey: [`/api/projects/${params.id}`]
+  });
+
   const form = useForm<InsertProject>({
     resolver: zodResolver(insertProjectSchema),
     defaultValues: {
@@ -52,6 +68,23 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
       status: "draft",
     },
   });
+
+  // Update form when project data is loaded
+  useEffect(() => {
+    if (project && !isNew) {
+      console.log("Updating form with project data:", project);
+      form.reset({
+        title: project.title,
+        description: project.description,
+        githubUrl: project.githubUrl || "",
+        liveUrl: project.liveUrl || "",
+        featured: Boolean(project.featured),
+        categories: project.categories || [],
+        tags: project.tags || [],
+        status: (project.status === "draft" || project.status === "published") ? project.status : "draft",
+      });
+    }
+  }, [project, isNew, form]);
 
   const mutation = useMutation({
     mutationFn: async (data: InsertProject) => {
@@ -131,6 +164,20 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
     );
   }, [form.watch()]);
 
+  // Show loading state when fetching project data
+  if (!isNew && isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p>Loading project data...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
@@ -141,7 +188,10 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
           <DialogTrigger asChild>
             <Button variant="outline">Preview</Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl">
+          <DialogContent className="max-w-3xl" aria-describedby="preview-description">
+            <div className="sr-only" id="preview-description">
+              Preview of how your project will appear on the portfolio
+            </div>
             {PreviewContent}
           </DialogContent>
         </Dialog>

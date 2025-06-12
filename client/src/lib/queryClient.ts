@@ -35,8 +35,14 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    // Convert legacy API paths to new API structure
+    // Handle array-based query keys for dynamic routes
     let url = queryKey[0] as string;
+    if (queryKey.length > 1) {
+      // Join additional segments for dynamic routes like /api/projects/:id
+      url = `${url}/${queryKey.slice(1).join('/')}`;
+    }
+    
+    // Convert legacy API paths to new API structure
     if (url.startsWith('/api/')) {
       url = apiUrl(url.replace('/api/', ''));
     }
