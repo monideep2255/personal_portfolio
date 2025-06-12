@@ -40,9 +40,19 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
   const isNew = params.id === "new";
 
   // Fetch existing project data when editing
-  const { data: project, isLoading } = useQuery<Project>({
-    queryKey: ["/api/projects", params.id],
+  const { data: project, isLoading, error } = useQuery<Project>({
+    queryKey: [`/api/projects/${params.id}`],
     enabled: !isNew,
+  });
+
+  // Debug logging
+  console.log("ProjectEdit Debug:", {
+    isNew,
+    projectId: params.id,
+    isLoading,
+    project,
+    error,
+    queryKey: ["/api/projects", params.id]
   });
 
   const form = useForm<InsertProject>({
@@ -62,6 +72,7 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
   // Update form when project data is loaded
   useEffect(() => {
     if (project && !isNew) {
+      console.log("Updating form with project data:", project);
       form.reset({
         title: project.title,
         description: project.description,
@@ -177,7 +188,10 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
           <DialogTrigger asChild>
             <Button variant="outline">Preview</Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl">
+          <DialogContent className="max-w-3xl" aria-describedby="preview-description">
+            <div className="sr-only" id="preview-description">
+              Preview of how your project will appear on the portfolio
+            </div>
             {PreviewContent}
           </DialogContent>
         </Dialog>
