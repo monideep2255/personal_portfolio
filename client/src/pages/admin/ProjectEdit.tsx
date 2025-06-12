@@ -52,7 +52,7 @@ export default function ProjectEdit({ params }: { params: { id: string } }) {
     isLoading,
     project,
     error,
-    queryKey: ["/api/projects", params.id]
+    queryKey: [`/api/projects/${params.id}`]
   });
 
   const form = useForm<InsertProject>({
