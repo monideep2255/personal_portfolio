@@ -63,14 +63,7 @@ export const handler = async (event, context) => {
       };
     }
 
-    if (apiPath === '/contact' && httpMethod === 'POST') {
-      const [message] = await db.insert(contactMessages).values(parsedBody).returning();
-      return {
-        statusCode: 201,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify(message),
-      };
-    }
+
 
     if (apiPath === '/analytics' && httpMethod === 'POST') {
       const [event] = await db.insert(analytics).values(parsedBody).returning();
@@ -81,27 +74,64 @@ export const handler = async (event, context) => {
       };
     }
 
-    if (apiPath === '/admin/login' && httpMethod === 'POST') {
-      const { username, password } = parsedBody;
-      
-      if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+    if (apiPath === '/admin/login') {
+      if (httpMethod === 'GET') {
         return {
           statusCode: 200,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-            success: true, 
-            message: 'Login successful',
-            user: { username: username }
+            message: 'Admin login endpoint available',
+            method: 'POST',
+            required_fields: ['username', 'password']
           }),
         };
-      } else {
+      }
+      
+      if (httpMethod === 'POST') {
+        const { username, password } = parsedBody;
+        
+        if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+          return {
+            statusCode: 200,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              success: true, 
+              message: 'Login successful',
+              user: { username: username }
+            }),
+          };
+        } else {
+          return {
+            statusCode: 401,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              success: false, 
+              message: 'Invalid credentials' 
+            }),
+          };
+        }
+      }
+    }
+
+    if (apiPath === '/contact') {
+      if (httpMethod === 'GET') {
         return {
-          statusCode: 401,
+          statusCode: 200,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-            success: false, 
-            message: 'Invalid credentials' 
+            message: 'Contact form endpoint available',
+            method: 'POST',
+            required_fields: ['name', 'email', 'message']
           }),
+        };
+      }
+      
+      if (httpMethod === 'POST') {
+        const [message] = await db.insert(contactMessages).values(parsedBody).returning();
+        return {
+          statusCode: 201,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify(message),
         };
       }
     }
