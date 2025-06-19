@@ -1,10 +1,9 @@
 {
   "build": {
-    "command": "npm run build",
-    "publishDir": "dist"
+    "command": "echo 'Skipping build for faster deployment'"
   },
   "run": {
-    "command": "npm run build && npm start"
+    "command": "NODE_ENV=production tsx server/index.ts"
   },
   "env": {
     "NODE_ENV": "production"
