@@ -1,4 +1,4 @@
-# Use official Node.js runtime as base image
+# Use official Node.js runtime
 FROM node:20-alpine
 
 # Set working directory
@@ -7,17 +7,17 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies (including dev dependencies for build)
-RUN npm ci
+# Install dependencies
+RUN npm ci --only=production
 
 # Copy source code
 COPY . .
 
+# Set production environment
+ENV NODE_ENV=production
+
 # Build the application
 RUN npm run build
-
-# Set environment to production
-ENV NODE_ENV=production
 
 # Expose port
 EXPOSE 5000
