@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+
+// Smart development/production script for Replit
+import { spawn, execSync } from 'child_process';
+import { existsSync } from 'fs';
+
+// Detect if this is a deployment environment
+const isDeployment = process.env.REPLIT_DEPLOYMENT === 'true' ||
+                    process.env.NODE_ENV === 'production' ||
+                    process.env.REPLIT_CLUSTER === 'gcp' ||
+                    !process.env.REPLIT_DEV_DOMAIN;
+
+if (isDeployment) {
+  console.log('🚀 Production deployment detected');
+  
+  // Set production environment
+  process.env.NODE_ENV = 'production';
+  
+  // Build the application if needed
+  if (!existsSync('dist/index.js')) {
+    console.log('📦 Building application...');
+    execSync('npm run build', { stdio: 'inherit' });
+  }
+  
+  console.log('🌟 Starting production server...');
+  const server = spawn('node', ['dist/index.js'], {
+    stdio: 'inherit',
+    env: { ...process.env, NODE_ENV: 'production' }
+  });
+  
+  // Handle graceful shutdown
+  process.on('SIGTERM', () => server.kill('SIGTERM'));
+  process.on('SIGINT', () => server.kill('SIGINT'));
+  
+  server.on('exit', (code) => process.exit(code));
+} else {
+  console.log('🔧 Development mode detected');
+  const server = spawn('tsx', ['server/index.ts'], { stdio: 'inherit' });
+  
+  process.on('SIGTERM', () => server.kill('SIGTERM'));
+  process.on('SIGINT', () => server.kill('SIGINT'));
+  
+  server.on('exit', (code) => process.exit(code));
+}
