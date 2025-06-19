@@ -95,7 +95,7 @@ export default function Home() {
                 className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <a 
-                  href="https://huggingface.co/spaces/monideep2255/career_conversation" 
+                  href="https://huggingface.co/spaces/monideep2255/career_Monideep_Bethesda" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-2"
