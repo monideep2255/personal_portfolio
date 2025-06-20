@@ -1,27 +1,64 @@
-#!/usr/bin/env node
+// Primary entry point for Replit deployment
+// Configured for production environment
 
-// Main entry point that works with Replit's deployment system
-import { spawn } from 'child_process';
+const { execSync } = require('child_process');
+const fs = require('fs');
 
-// Check if we're in a Replit deployment environment
-const isReplitDeployment = process.env.REPLIT_DEPLOYMENT === 'true' || 
-                          process.env.NODE_ENV === 'production' ||
-                          process.argv.includes('--production');
+// Set production environment
+process.env.NODE_ENV = 'production';
+process.env.PORT = process.env.PORT || '5000';
 
-if (isReplitDeployment) {
-  // Production mode: start server directly with production environment
-  console.log('Starting in production mode');
-  process.env.NODE_ENV = 'production';
+console.log('Initializing production deployment...');
+console.log('Environment: production');
+console.log('Port:', process.env.PORT);
+
+// Check if we need to build
+const needsBuild = !fs.existsSync('dist/index.js');
+
+if (needsBuild) {
+  console.log('Building application...');
+  try {
+    // Build the application
+    execSync('npm run build', { stdio: 'inherit' });
+    console.log('Build completed successfully');
+  } catch (error) {
+    console.error('Build failed:', error.message);
+    // Fallback to direct server start if build fails
+    console.log('Falling back to direct server start...');
+    require('./run-production.js');
+    return;
+  }
+}
+
+// Start the built server
+if (fs.existsSync('dist/index.js')) {
+  console.log('Starting built production server...');
+  const { spawn } = require('child_process');
   
-  const server = spawn('tsx', ['server/index.ts'], {
+  const server = spawn('node', ['dist/index.js'], {
     stdio: 'inherit',
     env: { ...process.env, NODE_ENV: 'production' }
   });
   
-  server.on('exit', (code) => process.exit(code));
+  server.on('error', (err) => {
+    console.error('Built server failed, falling back to direct start:', err.message);
+    require('./run-production.js');
+  });
+  
+  server.on('close', (code) => {
+    if (code !== 0) {
+      console.log('Built server exited, falling back to direct start');
+      require('./run-production.js');
+    } else {
+      process.exit(code);
+    }
+  });
+  
+  // Handle shutdown
+  process.on('SIGTERM', () => server.kill('SIGTERM'));
+  process.on('SIGINT', () => server.kill('SIGINT'));
+  
 } else {
-  // Development mode
-  console.log('Starting in development mode');
-  const server = spawn('tsx', ['server/index.ts'], { stdio: 'inherit' });
-  server.on('exit', (code) => process.exit(code));
+  console.log('No build output found, starting direct server...');
+  require('./run-production.js');
 }
