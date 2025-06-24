@@ -1,61 +1,59 @@
 #!/usr/bin/env node
 
-import { execSync, spawn } from 'child_process';
-import { existsSync } from 'fs';
+// Replit deployment bypass script
+// This works around the .replit file limitation by detecting the environment
 
-// Force production environment for deployment
-process.env.NODE_ENV = 'production';
+import { spawn } from 'child_process';
+import fs from 'fs';
 
-console.log('Replit Production Deployment Starting...');
+// Detect if we're in a deployment environment
+const isDeployment = process.env.NODE_ENV === 'production' || 
+                    process.env.REPLIT_DEPLOYMENT === 'true' ||
+                    process.argv.includes('--production');
 
-try {
-  // Always build for deployment
-  console.log('Building application for production...');
-  execSync('npm run build', { 
-    stdio: 'inherit',
-    env: { ...process.env, NODE_ENV: 'production' }
-  });
+console.log('Environment detection:');
+console.log('- NODE_ENV:', process.env.NODE_ENV);
+console.log('- Is deployment:', isDeployment);
 
-  // Verify build
-  if (!existsSync('dist/index.js')) {
-    throw new Error('Production build failed - server bundle not found');
-  }
-
-  if (!existsSync('dist/index.html')) {
-    throw new Error('Production build failed - client bundle not found');  
-  }
-
-  console.log('Build successful - starting production server...');
+if (isDeployment) {
+  console.log('Running in production mode...');
   
-  // Start production server
-  const server = spawn('node', ['dist/index.js'], {
-    stdio: 'inherit',
-    env: { 
-      ...process.env, 
-      NODE_ENV: 'production',
-      PORT: process.env.PORT || 5000
-    }
-  });
-
-  // Handle shutdown signals
-  ['SIGTERM', 'SIGINT', 'SIGHUP'].forEach(signal => {
-    process.on(signal, () => {
-      console.log(`Received ${signal}, shutting down gracefully...`);
-      server.kill(signal);
+  // Set production environment
+  process.env.NODE_ENV = 'production';
+  
+  // Check if build exists
+  const buildExists = fs.existsSync('./dist/index.js');
+  
+  if (!buildExists) {
+    console.log('Build not found, building application...');
+    const build = spawn('npm', ['run', 'build'], { stdio: 'inherit' });
+    
+    build.on('close', (code) => {
+      if (code === 0) {
+        console.log('Build successful, starting production server...');
+        const server = spawn('npm', ['start'], { stdio: 'inherit' });
+        
+        server.on('close', (serverCode) => {
+          process.exit(serverCode);
+        });
+      } else {
+        console.error('Build failed with code:', code);
+        process.exit(1);
+      }
     });
+  } else {
+    console.log('Build exists, starting production server...');
+    const server = spawn('npm', ['start'], { stdio: 'inherit' });
+    
+    server.on('close', (code) => {
+      process.exit(code);
+    });
+  }
+} else {
+  console.log('Running in development mode...');
+  const dev = spawn('npm', ['run', 'dev'], { stdio: 'inherit' });
+  
+  dev.on('close', (code) => {
+    process.exit(code);
   });
-
-  server.on('error', (error) => {
-    console.error('Server error:', error);
-    process.exit(1);
-  });
-
-  server.on('exit', (code, signal) => {
-    console.log(`Server exited with code ${code} and signal ${signal}`);
-    process.exit(code || 0);
-  });
-
-} catch (error) {
-  console.error('Deployment failed:', error.message);
-  process.exit(1);
 }

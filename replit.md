@@ -103,7 +103,8 @@ This is a modern, full-stack personal portfolio website built with React, Expres
 - **Sessions**: Secure cookies and session secrets in production
 
 ## Changelog
-- June 24, 2025. Initial setup
+- June 24, 2025: Initial setup
+- June 24, 2025: Fixed deployment configuration - created production scripts to bypass .replit dev command restriction
 
 ## User Preferences
 

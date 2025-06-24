@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Production build and start script
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
 
 console.log('Building for production...');
 
