@@ -1,4 +1,4 @@
-# Use official Node.js runtime
+# Use Node.js 20 Alpine for smaller image size
 FROM node:20-alpine
 
 # Set working directory
@@ -13,11 +13,12 @@ RUN npm ci --only=production
 # Copy source code
 COPY . .
 
-# Set production environment
-ENV NODE_ENV=production
-
 # Build the application
 RUN npm run build
+
+# Set production environment
+ENV NODE_ENV=production
+ENV PORT=5000
 
 # Expose port
 EXPOSE 5000
