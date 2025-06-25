@@ -35,11 +35,18 @@ export async function registerRoutes(app: Express) {
   // Project endpoints
   app.get("/api/projects", async (_req, res) => {
     try {
+      console.log(`[${new Date().toISOString()}] Fetching projects...`);
       const projects = await storage.getProjects();
+      console.log(`[${new Date().toISOString()}] Found ${projects.length} projects`);
       res.json(projects);
     } catch (error) {
       console.error("Failed to fetch projects:", error);
-      res.status(500).json({ message: "Failed to fetch projects" });
+      console.error("Database URL exists:", !!process.env.DATABASE_URL);
+      console.error("Environment:", process.env.NODE_ENV);
+      res.status(500).json({ 
+        message: "Failed to fetch projects",
+        error: process.env.NODE_ENV === 'development' ? error.message : 'Database connection error'
+      });
     }
   });
 

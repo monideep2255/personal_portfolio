@@ -8,13 +8,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Session configuration
+// Session configuration with production-ready secret
 app.use(session({
-  secret: 'your-secret-key',
+  secret: process.env.SESSION_SECRET || 'your-secret-key',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: false, // Disabled for deployment compatibility
+    httpOnly: true,
+    sameSite: 'lax', // Better cross-origin cookie handling
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
@@ -52,12 +54,38 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add CORS headers for deployment
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
+// Health check endpoint for Cloud Run
+app.get('/health', (_req: Request, res: Response) => {
+  res.status(200).json({ 
+    status: 'healthy', 
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString()
+  });
+});
+
 (async () => {
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
+    
+    // Log errors in production for debugging
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Server Error:', { status, message, stack: err.stack });
+    }
 
     res.status(status).json({ message });
     throw err;
@@ -69,7 +97,7 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const port = 5000;
+  const port = process.env.PORT || 5000;
   server.listen({
     port,
     host: "0.0.0.0",

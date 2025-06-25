@@ -1,8 +1,8 @@
-*Last Updated: June 12, 2025*
+*Last Updated: June 24, 2025*
 
 # Personal Portfolio Website
 
-[Visit Personal Portfolio](https://monideep-chakraborti.netlify.app/)
+[Visit Personal Portfolio](https://personal-portfolio-monideepchakrab.replit.app/)
 
 ## Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
@@ -169,8 +169,6 @@ The application will start in development mode with hot-reload enabled.
 ## 🚀 Deployment
 
 #### Recommended: Deploy on Netlify (Production Ready)
-
-The codebase is optimized for Netlify deployment with serverless functions and automatic scaling.
 
 **Prerequisites:**
 1. **Neon Database** (Free PostgreSQL hosting)

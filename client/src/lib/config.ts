@@ -1,10 +1,6 @@
 // API configuration for different environments
 const getApiBaseUrl = () => {
-  // In production (Netlify), use Netlify Functions
-  if (import.meta.env.PROD) {
-    return '/.netlify/functions/api';
-  }
-  // In development, use local Express server
+  // Always use /api for both development and production on Replit
   return '/api';
 };
 

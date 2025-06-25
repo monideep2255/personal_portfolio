@@ -11,5 +11,12 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// Production-ready database configuration
+const connectionConfig = {
+  connectionString: process.env.DATABASE_URL,
+  // Always enable SSL for Neon
+  ssl: { rejectUnauthorized: false }
+};
+
+export const pool = new Pool(connectionConfig);
 export const db = drizzle({ client: pool, schema });

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# NPM wrapper script for Replit deployment
+# This intercepts npm commands and redirects to production when deployed
+
+# Check if this is a deployment environment
+if [ "$REPLIT_DEPLOYMENT" = "true" ] || [ "$NODE_ENV" = "production" ] || [ -z "$REPLIT_DEV_DOMAIN" ]; then
+    echo "🚀 Production deployment detected"
+    
+    if [ "$1" = "run" ] && [ "$2" = "dev" ]; then
+        echo "📦 Building for production..."
+        /usr/bin/npm run build
+        
+        echo "🌟 Starting production server..."
+        NODE_ENV=production /usr/bin/npm start
+    else
+        # Pass through other npm commands
+        /usr/bin/npm "$@"
+    fi
+else
+    # Development mode - use original npm
+    /usr/bin/npm "$@"
+fi

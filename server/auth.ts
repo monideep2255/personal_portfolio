@@ -11,17 +11,24 @@ export function configureAuth(app: Express) {
   app.post("/api/auth/login", async (req, res) => {
     try {
       const credentials = loginSchema.parse(req.body);
+      
+      console.log('Login attempt for username:', credentials.username);
+      console.log('Admin username exists:', !!process.env.ADMIN_USERNAME);
+      console.log('Admin password exists:', !!process.env.ADMIN_PASSWORD);
 
       if (
         credentials.username === process.env.ADMIN_USERNAME &&
         credentials.password === process.env.ADMIN_PASSWORD
       ) {
         req.session.isAuthenticated = true;
+        console.log('Authentication successful');
         res.json({ success: true });
       } else {
+        console.log('Authentication failed - invalid credentials');
         res.status(401).json({ message: "Invalid credentials" });
       }
     } catch (error) {
+      console.error('Login error:', error);
       res.status(400).json({ message: "Invalid request" });
     }
   });
