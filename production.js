@@ -85,6 +85,17 @@ async function start() {
   });
 }
 
+async function seedDatabase() {
+  console.log('🌱 Checking database seed status...');
+  try {
+    await runCommand('node', ['seed-production.js']);
+    console.log('✅ Database seeding completed');
+  } catch (error) {
+    console.log('⚠️  Database seeding failed (may already be seeded):', error.message);
+    // Continue anyway - seeding failure shouldn't stop deployment
+  }
+}
+
 async function main() {
   try {
     // Check if we need to build
@@ -96,6 +107,9 @@ async function main() {
     } else {
       console.log('✅ Build artifacts found, skipping build');
     }
+    
+    // Seed database if needed
+    await seedDatabase();
     
     // Start the production server
     await start();
