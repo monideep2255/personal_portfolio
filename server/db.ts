@@ -14,10 +14,8 @@ if (!process.env.DATABASE_URL) {
 // Production-ready database configuration
 const connectionConfig = {
   connectionString: process.env.DATABASE_URL,
-  // Enable SSL in production
-  ...(process.env.NODE_ENV === 'production' && {
-    ssl: { rejectUnauthorized: false }
-  })
+  // Always enable SSL for Neon
+  ssl: { rejectUnauthorized: false }
 };
 
 export const pool = new Pool(connectionConfig);
