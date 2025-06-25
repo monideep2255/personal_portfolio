@@ -51,7 +51,26 @@ Make sure these are set for production:
 - `DATABASE_URL`
 - Any other required environment variables
 
+## Database Issue Fix
+
+### Problem Identified
+The deployed version shows "projects will be added soon" because:
+1. Production database may be empty (different from development database)
+2. Database connection issues in production environment
+
+### Solutions Added
+- `seed-production.js` - Seeds production database with projects if empty
+- Enhanced production script automatically seeds database on deployment
+- Added comprehensive error logging to identify connection issues
+
+### Database Seeding
+The production script now automatically:
+1. Checks if database has existing projects
+2. Seeds with sample projects if database is empty
+3. Continues deployment even if seeding fails
+
 ## Next Steps
 1. Update your `.replit` file with the production commands shown above
 2. Test the deployment using the new configuration
-3. The application will automatically build and start in production mode
+3. The application will automatically build, seed database, and start in production mode
+4. Projects should appear correctly in deployed version
