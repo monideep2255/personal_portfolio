@@ -103,6 +103,12 @@ This is a full-stack personal portfolio website built with React, Express.js, an
 - **Cloud Build**: Google Cloud Run deployment configuration
 - **Replit**: Smart development/production mode detection
 
+## Recent Changes
+- June 25, 2025: Fixed deployment configuration by creating production-ready scripts
+  - Created production.js for complete deployment handling
+  - Added build verification and graceful startup
+  - Resolved security blocking of 'dev' command in deployment
+
 ## Changelog
 - June 25, 2025. Initial setup
 
