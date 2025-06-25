@@ -59,7 +59,7 @@ The deployed version shows "projects will be added soon" because:
 2. Database connection issues in production environment
 
 ### Solutions Added
-- `seed-production.js` - Seeds production database with projects if empty
+- `seed-production.js` - Seeds production database with your actual local projects if empty
 - Enhanced production script automatically seeds database on deployment
 - Added comprehensive error logging to identify connection issues
 

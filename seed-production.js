@@ -4,7 +4,7 @@
 import { db } from './server/db.js';
 import { projects } from './shared/schema.js';
 
-const sampleProjects = [
+const actualProjects = [
   {
     title: "Personal Portfolio",
     description: "A modern, responsive portfolio website built with React and Express, featuring project showcase, contact form, and admin dashboard.",
@@ -31,7 +31,7 @@ const sampleProjects = [
     title: "Insight Lens",
     description: "An AI-powered data analysis tool that provides insights and visualizations for complex datasets.",
     githubUrl: "https://github.com/monideep2255/insight-lens",
-    liveUrl: "https://insight-lens-monideepchakrab.replit.app",
+    liveUrl: " https://insight-lens-monideepchakrab.replit.app",
     featured: false,
     patternSeed: 34567,
     categories: ["AI/ML", "Data Analysis"],
@@ -63,9 +63,9 @@ async function seedProduction() {
       return;
     }
     
-    console.log('Seeding database with sample projects...');
+    console.log('Seeding database with your actual projects...');
     
-    for (const project of sampleProjects) {
+    for (const project of actualProjects) {
       await db.insert(projects).values(project);
       console.log(`Added project: ${project.title}`);
     }
