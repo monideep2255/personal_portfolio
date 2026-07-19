@@ -1,6 +1,22 @@
-import { pgTable, text, serial, varchar, boolean, integer, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, varchar, boolean, integer, timestamp, jsonb, json, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+
+// Session store table for connect-pg-simple. Defined here so `drizzle-kit push`
+// creates it on a fresh database. connect-pg-simple's own createTableIfMissing
+// is not used because its built-in schema uses a WITH (OIDS=FALSE) clause that
+// newer Postgres rejects.
+export const session = pgTable(
+  "session",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: json("sess").notNull(),
+    expire: timestamp("expire", { precision: 6 }).notNull(),
+  },
+  (table) => ({
+    expireIdx: index("IDX_session_expire").on(table.expire),
+  }),
+);
 
 export const contactMessages = pgTable("contact_messages", {
   id: serial("id").primaryKey(),

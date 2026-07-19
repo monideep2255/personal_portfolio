@@ -21,8 +21,19 @@ export function configureAuth(app: Express) {
         credentials.password === process.env.ADMIN_PASSWORD
       ) {
         req.session.isAuthenticated = true;
-        console.log('Authentication successful');
-        res.json({ success: true });
+        // Explicitly persist the session before responding. In a serverless
+        // function the process can freeze right after the response is sent,
+        // which would kill express-session's default fire-and-forget write to
+        // Postgres. Saving with a callback guarantees the row is written first.
+        req.session.save((err) => {
+          if (err) {
+            console.error('Session save failed:', err);
+            res.status(500).json({ message: "Could not establish session" });
+          } else {
+            console.log('Authentication successful');
+            res.json({ success: true });
+          }
+        });
       } else {
         console.log('Authentication failed - invalid credentials');
         res.status(401).json({ message: "Invalid credentials" });
