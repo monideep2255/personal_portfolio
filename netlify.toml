@@ -1,0 +1,24 @@
+# Netlify configuration for personal_portfolio.
+# The React client builds to dist/public and is served static.
+# The Express API is bundled into a single Netlify Function (netlify/functions/api.mjs)
+# by build:netlify, and /api/* is routed to it. Neon is the database.
+
+[build]
+  command = "npm run build:netlify"
+  publish = "dist/public"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# API first: send /api/* to the function (path preserved via :splat).
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# SPA fallback: everything else serves the client shell.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
