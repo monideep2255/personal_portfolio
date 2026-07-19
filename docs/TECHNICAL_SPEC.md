@@ -2,6 +2,18 @@
 # Technical Specification Document
 ## Personal Portfolio Website
 
+## Current status (July 2026): architecture as built
+
+This original spec is kept for history. Some details below are out of date. The as-built app was migrated off Replit to a free serverless stack:
+
+- Frontend: React with Vite (not Next.js), served static by Netlify.
+- API: the Express app runs as a single Netlify Function via serverless-http.
+- Database: Neon serverless Postgres via Drizzle ORM.
+- Auth: express-session with a Postgres session store (connect-pg-simple).
+- Email: Resend (contact form).
+
+For setup and tests, see [../README.md](../README.md) and [test-cases.md](test-cases.md). Live site: https://monideep-portfolio.netlify.app
+
 ### System Architecture
 
 #### Frontend Architecture

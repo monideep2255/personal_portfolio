@@ -1,5 +1,9 @@
 # Replit.md
 
+## Migrated off Replit (July 2026)
+
+This document describes the app as it ran on Replit and is kept for history. The app now runs on Netlify (static React client plus the Express API as a serverless-http function) with a Neon database. For the current architecture and setup, see [README.md](README.md). Live site: https://monideep-portfolio.netlify.app
+
 ## Overview
 This is a full-stack personal portfolio website built with React, Express.js, and PostgreSQL. The application features a modern, responsive design with both public portfolio showcase and protected admin functionality for content management. The system includes project management, contact form handling, analytics tracking, and a complete authentication system.
 

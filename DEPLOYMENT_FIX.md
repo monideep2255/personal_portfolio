@@ -1,5 +1,9 @@
 # Complete Deployment Fix
 
+## Superseded (July 2026)
+
+These notes describe fixes for the old Replit and Cloud Run deployment and are kept for history. The app has since been migrated to Netlify (static client plus a serverless-http function) and Neon. For the current deployment, see [README.md](README.md). Live site: https://monideep-portfolio.netlify.app
+
 ## Issues Identified and Fixed
 
 ### 1. Development Command Usage

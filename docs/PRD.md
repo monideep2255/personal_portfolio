@@ -1,7 +1,11 @@
 # Personal Portfolio Website
 
+## Current status (July 2026)
+
+This is the original planning document, kept for history. The app shipped and was migrated off Replit to a free serverless stack (Netlify + Neon). For the current architecture and how to run it, see [../README.md](../README.md) and [test-cases.md](test-cases.md). Live site: https://monideep-portfolio.netlify.app
+
 ## Link To Website and Documents
-[Portfolio Website](https://personal-portfolio-monideepchakrab.replit.app/)
+[Portfolio Website](https://monideep-portfolio.netlify.app)
 
 ## Project Overview
 A modern, responsive personal portfolio management system designed for seamless project showcase and administration.
