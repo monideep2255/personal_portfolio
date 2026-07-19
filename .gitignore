@@ -7,4 +7,7 @@ vite.config.ts.*
 .env
 .env.local
 .env.*.local
+netlify/functions/api.js
 netlify/functions/api.mjs
+# Local Netlify folder
+.netlify

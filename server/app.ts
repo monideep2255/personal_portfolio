@@ -29,7 +29,10 @@ export async function createApp() {
     session({
       store: new PgSession({
         pool,
-        createTableIfMissing: true,
+        // The session table is created by drizzle (see shared/schema.ts), not by
+        // connect-pg-simple, whose built-in create uses a Postgres clause newer
+        // servers reject. See also the manual SQL in the README setup steps.
+        createTableIfMissing: false,
       }),
       secret: process.env.SESSION_SECRET || "dev-only-insecure-secret",
       resave: false,

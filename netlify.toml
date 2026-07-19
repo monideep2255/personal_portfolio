@@ -6,7 +6,7 @@
 [build]
   command = "npm run build:netlify"
   publish = "dist/public"
-  functions = "netlify/functions"
+  functions = "netlify/api-functions"
 
 [functions]
   node_bundler = "esbuild"
