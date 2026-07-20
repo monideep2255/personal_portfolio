@@ -59,6 +59,17 @@ const actualProjects = [
     categories: ["AI/ML", "Web Development"],
     tags: ["AI", "DeepSeek", "React"],
     status: "published"
+  },
+  {
+    title: "Prompt Engineering Practice Lab",
+    description: "An AI-powered coaching tool for writing better prompts. Submit a prompt and it scores clarity, specificity, task alignment, and completeness, returns written feedback and an improved version, and can pull retrieval-augmented context from an expert content library. Powered by the DeepSeek API.",
+    githubUrl: "https://github.com/monideep2255/prompt_engineering_practice",
+    liveUrl: "https://prompt-engineering-practice.onrender.com",
+    featured: true,
+    patternSeed: 67890,
+    categories: ["AI/ML", "Web Development"],
+    tags: ["AI", "DeepSeek", "Prompt Engineering"],
+    status: "published"
   }
 ];
 
