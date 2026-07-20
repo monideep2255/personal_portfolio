@@ -48,6 +48,17 @@ const actualProjects = [
     categories: ["Automation"],
     tags: ["Automation", "Motivation", "Productivity"],
     status: "published"
+  },
+  {
+    title: "Content Simplifier",
+    description: "An AI-powered tool that turns complex text, web pages, and files into clear, plain-language explanations with real-world analogies. Supports follow-up questions and a searchable history, powered by the DeepSeek API.",
+    githubUrl: "https://github.com/monideep2255/content_simplified",
+    liveUrl: "https://content-simplified.onrender.com",
+    featured: true,
+    patternSeed: 56789,
+    categories: ["AI/ML", "Web Development"],
+    tags: ["AI", "DeepSeek", "React"],
+    status: "published"
   }
 ];
 
