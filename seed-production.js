@@ -20,7 +20,7 @@ const actualProjects = [
     title: "Fin Buddy",
     description: "A comprehensive financial management application to track expenses, manage budgets, and analyze spending patterns.",
     githubUrl: "https://github.com/monideep2255/fin-buddy",
-    liveUrl: "https://financial-learning-buddy-monideepchakrab.replit.app",
+    liveUrl: "https://finbuddy-web.onrender.com",
     featured: true,
     patternSeed: 23456,
     categories: ["Web Development", "FinTech"],
