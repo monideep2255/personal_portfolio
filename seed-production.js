@@ -29,13 +29,13 @@ const actualProjects = [
   },
   {
     title: "Insight Lens",
-    description: "An AI-powered data analysis tool that provides insights and visualizations for complex datasets.",
-    githubUrl: "https://github.com/monideep2255/insight-lens",
-    liveUrl: "https://insight-lens-monideepchakrab.replit.app",
+    description: "An AI-powered company research assistant for value investing. Pull a company's SEC filing from EDGAR or upload a PDF, then generate insight cards on the business, moat, financial health, management, risks, and valuation, compare two companies, and export the analysis to PDF.",
+    githubUrl: "https://github.com/monideep2255/InsightLens",
+    liveUrl: "https://insightlens-wz4n.onrender.com",
     featured: false,
     patternSeed: 34567,
-    categories: ["AI/ML", "Data Analysis"],
-    tags: ["AI", "Data Science", "Visualization"],
+    categories: ["AI/ML", "FinTech"],
+    tags: ["AI", "Value Investing", "SEC Filings"],
     status: "published"
   },
   {
