@@ -81,6 +81,17 @@ const actualProjects = [
     categories: ["AI/ML", "Web Development"],
     tags: ["AI", "OpenAI", "Research"],
     status: "published"
+  },
+  {
+    title: "ChessMate",
+    description: "An interactive chess learning app. Work through nine piece and rule tutorials with lessons, exercises, and quizzes, play on a full board with legal-move validation, hints, and threat highlighting, and practice against a local client-side opponent across four difficulty levels. Accounts, saved games, statistics, and puzzles persist in Postgres.",
+    githubUrl: "https://github.com/monideep2255/replit-chess-master",
+    liveUrl: "https://chessmate-6vy7.onrender.com",
+    featured: false,
+    patternSeed: 89012,
+    categories: ["Web Development"],
+    tags: ["Chess", "React", "TypeScript"],
+    status: "published"
   }
 ];
 
