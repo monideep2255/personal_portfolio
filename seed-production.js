@@ -70,6 +70,17 @@ const actualProjects = [
     categories: ["AI/ML", "Web Development"],
     tags: ["AI", "DeepSeek", "Prompt Engineering"],
     status: "published"
+  },
+  {
+    title: "AI Research Partner",
+    description: "An AI research assistant that helps academics review manuscripts. Upload or paste a paper, get an executive summary and section breakdown, ask questions grounded in the document, then generate and export a full review as PDF or Word. Voice input via Whisper, powered by OpenAI GPT-4o.",
+    githubUrl: "https://github.com/monideep2255/ai_research_assistant",
+    liveUrl: "https://ai-research-assistant-zo39.onrender.com",
+    featured: false,
+    patternSeed: 78901,
+    categories: ["AI/ML", "Web Development"],
+    tags: ["AI", "OpenAI", "Research"],
+    status: "published"
   }
 ];
 
