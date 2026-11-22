@@ -31,7 +31,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Product Manager & AI/ML Specialist
+            AI Product Manager, Biomedical Search
           </motion.h2>
 
           <motion.p
@@ -40,7 +40,7 @@ export default function Home() {
             transition={{ delay: 0.5 }}
             className="text-xl text-muted-foreground mb-8 leading-relaxed"
           >
-            Welcome! I'm passionate about transforming complex AI/ML technologies into user-friendly solutions at NCBI, NIH. With expertise in product management and artificial intelligence, I focus on innovations that advance biomedical research and enhance user experiences.
+            I build AI products that make scientific discovery more intelligent and accessible. At NCBI, NIH, I lead the roadmap for Next Generation Search, modernizing a biomedical search platform used by 6+ million people daily.
           </motion.p>
 
           <motion.div
