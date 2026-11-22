@@ -20,6 +20,9 @@ export default function Projects() {
   // Memoize filter function
   const filteredProjects = useMemo(() => {
     return projects?.filter((project) => {
+      // Drafts stay in the database for the admin panel but never show publicly.
+      if (project.status === "draft") return false;
+
       const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase());
 
